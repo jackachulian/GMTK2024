@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Models/Protagonist Model Blender Files/protag.blend.meta
 guid: df99033b00415894da7981885ad5949d
+=======
+guid: 0046738953b31ea4b84486546cb301bb
+>>>>>>> d2a9f99b65fdd69f535b24afffa264987aea16d1:Assets/Models/Protagonist Model/protag.blend.meta
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
