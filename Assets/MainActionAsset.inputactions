@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "SelectBuildable",
+                    "type": "Value",
+                    "id": "afb924e4-2fa9-48c7-a8b7-036d623fdc2a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Build",
                     "type": "Value",
                     "id": "4b95d312-8237-4c2d-8ec3-0b6d629537dc",
@@ -58,17 +67,6 @@
                     "name": "",
                     "id": "ea22528b-6406-4305-bb52-329082bb93af",
                     "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9848cfb1-618d-4064-9677-c17e225e2994",
-                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -178,11 +176,22 @@
                 {
                     "name": "",
                     "id": "dec9fdba-143a-4c3c-becc-7daedc9bae0f",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Build",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7d86299b-64e3-48d3-9e67-e3c7aac2982d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectBuildable",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

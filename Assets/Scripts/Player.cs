@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI debugText;
 
     private Rigidbody rb;
+    private BuildableManager buildableManager;
     // private Collider collider;
     // [SerializeField] private InputActionAsset actionAsset;
     private Vector3 playerVelocity;
@@ -26,9 +27,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float airAccelMult = 0.5f;
     [SerializeField] private float airDeccelMult = 0.25f;
 
-    [SerializeField] private GameObject[] buildables;
     [SerializeField] private GameObject buildPreview;
-
 
     [SerializeField] private GameObject playerModel;
     
@@ -54,6 +53,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        buildableManager = GetComponent<BuildableManager>();
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -81,8 +82,6 @@ public class Player : MonoBehaviour
         camParent.eulerAngles = new Vector3(camParent.eulerAngles.x + camRotateDir.y * camSens.y, camParent.eulerAngles.y + camRotateDir.x * camSens.x, 0f);
         // camParent.eulerAngles = new Vector3(camRotateDir.y * camSens.y, camRotateDir.x * camSens.x, 0f);
 
-        // decide which phys mode to use
-
         GeneralPhysics();
 
         // end of frame logic
@@ -106,6 +105,13 @@ public class Player : MonoBehaviour
             forward = camParent.TransformDirection(normalizedMoveDir);
             dotVel = Mathf.Max(startSpeed, dotVel + accel * (IsGrounded() ? 1f : airAccelMult));
         }
+
+        // set lateral position of build preview. vertical position is set in own script
+        Vector3 buildPreviewPos = buildPreview.transform.position;
+        buildPreviewPos.x = transform.position.x + forward.x * 2f;
+        buildPreviewPos.z = transform.position.z + forward.z * 2f;
+        buildPreview.transform.position = buildPreviewPos;
+        buildPreview.transform.forward = forward;
 
         camParent.eulerAngles = oldCamAngles;
         playerVelocity.x = (forward.x * dotVel);
@@ -151,7 +157,14 @@ public class Player : MonoBehaviour
     {
         float v = value.Get<float>();
 
-        if (v != 0f) Instantiate(buildables[0], buildPreview.transform.position, buildPreview.transform.rotation);
+        if (v != 0f) buildableManager.PlaceBuildable();
+    }
+
+    public void OnSelectBuildable(InputValue value)
+    {
+        float v = value.Get<float>();
+
+        if (v != 0f) buildableManager.CycleBuildableSelection();
     }
 
     public void OnMove(InputValue value)
