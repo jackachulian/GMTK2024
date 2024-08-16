@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-
+    [SerializeField] LevelData levelData;
     [SerializeField] TMPro.TextMeshProUGUI debugText;
 
     private Rigidbody rb;
@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float jumpControl = 0.8f;
     [SerializeField] private float airAccelMult = 0.5f;
     [SerializeField] private float airDeccelMult = 0.25f;
+
+    [SerializeField] private float scaleMin = 0.5f;
+    [SerializeField] private float scaleMax = 3f;
 
     [SerializeField] private GameObject buildPreview;
 
@@ -108,10 +111,10 @@ public class Player : MonoBehaviour
 
         // set lateral position of build preview. vertical position is set in own script
         Vector3 buildPreviewPos = buildPreview.transform.position;
-        buildPreviewPos.x = transform.position.x + forward.x * 2f;
-        buildPreviewPos.z = transform.position.z + forward.z * 2f;
+        buildPreviewPos.x = transform.position.x + forward.x * 2f * levelData.playerScale;
+        buildPreviewPos.z = transform.position.z + forward.z * 2f * levelData.playerScale;
         buildPreview.transform.position = buildPreviewPos;
-        buildPreview.transform.forward = forward;
+        if (forward != Vector3.zero) buildPreview.transform.forward = forward;
 
         camParent.eulerAngles = oldCamAngles;
         playerVelocity.x = (forward.x * dotVel);
@@ -165,6 +168,17 @@ public class Player : MonoBehaviour
         float v = value.Get<float>();
 
         if (v != 0f) buildableManager.CycleBuildableSelection();
+    }
+
+    public void OnChangeScale(InputValue value)
+    {
+        float v = value.Get<float>();
+
+        // Debug.Log("Mouse scroll: " + v);
+        if (v != 0)
+        {
+            levelData.playerScale = Mathf.Clamp(levelData.playerScale + v / 400, scaleMin, scaleMax);
+        }
     }
 
     public void OnMove(InputValue value)

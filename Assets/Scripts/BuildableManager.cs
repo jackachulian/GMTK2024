@@ -51,7 +51,9 @@ public class BuildableManager : MonoBehaviour
         if (disabled) return;
 
         // spawn gameobject
-        Instantiate(buildables[currentSelectedBuildable], buildPreview.transform.position, buildPreview.transform.rotation);
+        Transform b = Instantiate(buildables[currentSelectedBuildable], buildPreview.transform.position, buildPreview.transform.rotation).transform;
+        // buildables are always effected by player scale
+        b.localScale = b.localScale *= levelData.playerScale;
         buildableAmounts[currentSelectedBuildable] -= 1;
         CycleBuildableSelection(0);
     }
