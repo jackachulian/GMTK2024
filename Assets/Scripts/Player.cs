@@ -23,6 +23,12 @@ public class Player : MonoBehaviour
     [SerializeField] public float pSpeed = 10f;
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float jumpControl = 0.8f;
+    [SerializeField] private float airAccelMult = 0.5f;
+    [SerializeField] private float airDeccelMult = 0.25f;
+
+    [SerializeField] private GameObject[] buildables;
+    [SerializeField] private GameObject buildPreview;
+
 
     [SerializeField] private GameObject playerModel;
     
@@ -32,7 +38,7 @@ public class Player : MonoBehaviour
     private Vector3 dashDirection;
     private Vector3 forward;
     private bool jumpPressed = false;
-    public float dotVel;
+    [System.NonSerialized] public float dotVel;
     private float surfaceDot = -2;
     private float surfaceDotLastFrame;
     private bool walledLastFrame;
@@ -98,7 +104,7 @@ public class Player : MonoBehaviour
         {
             normalizedMoveDir = Vector3.Normalize(moveDir);
             forward = camParent.TransformDirection(normalizedMoveDir);
-            dotVel = Mathf.Max(startSpeed, dotVel + accel * (IsGrounded() ? 1f : 0.5f));
+            dotVel = Mathf.Max(startSpeed, dotVel + accel * (IsGrounded() ? 1f : airAccelMult));
         }
 
         camParent.eulerAngles = oldCamAngles;
@@ -112,9 +118,9 @@ public class Player : MonoBehaviour
         }
 
         if (moveDir != Vector3.zero) playerModel.transform.forward = forward;
-        else dotVel = Mathf.Max(dotVel - deaccel * (IsGrounded() ? 1f : 0.25f), 0f);
+        else dotVel = Mathf.Max(dotVel - deaccel * (IsGrounded() ? 1f : airDeccelMult), 0f);
 
-        addedVel = new Vector3(Mathf.Max(Mathf.Abs(addedVel.x) - deaccel * (IsGrounded() ? 1f : 0.25f), 0f) * Mathf.Sign(addedVel.x), 0f, Mathf.Max(Mathf.Max(Mathf.Abs(addedVel.z) - deaccel * (IsGrounded() ? 1f : 0.25f), 0f) * Mathf.Sign(addedVel.z)));
+        addedVel = new Vector3(Mathf.Max(Mathf.Abs(addedVel.x) - deaccel * (IsGrounded() ? 1f : airDeccelMult), 0f) * Mathf.Sign(addedVel.x), 0f, Mathf.Max(Mathf.Max(Mathf.Abs(addedVel.z) - deaccel * (IsGrounded() ? 1f : airDeccelMult), 0f) * Mathf.Sign(addedVel.z)));
 
         // gravity
         if (!IsGrounded()) playerVelocity.y += gravity;
@@ -130,12 +136,6 @@ public class Player : MonoBehaviour
         {
             playerVelocity.y *= jumpControl;
         }
-        
-        // wall logic
-        if (IsWalled())
-        {
-            // dotVel = 0;
-        }
     }
 
     public void OnJump(InputValue value)
@@ -145,6 +145,13 @@ public class Player : MonoBehaviour
         // 1 when pressed, 0 when not
         jumpPressed = (v != 0f);
 
+    }
+
+    public void OnBuild(InputValue value)
+    {
+        float v = value.Get<float>();
+
+        if (v != 0f) Instantiate(buildables[0], buildPreview.transform.position, buildPreview.transform.rotation);
     }
 
     public void OnMove(InputValue value)

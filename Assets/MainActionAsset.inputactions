@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Build",
+                    "type": "Value",
+                    "id": "4b95d312-8237-4c2d-8ec3-0b6d629537dc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Move",
                     "type": "Value",
                     "id": "c406f96c-8f37-4466-b752-3ba16583a91c",
@@ -163,6 +172,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "CamRotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dec9fdba-143a-4c3c-becc-7daedc9bae0f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Build",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
