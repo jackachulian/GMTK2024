@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Buildable : MonoBehaviour
 {
-    private Renderer renderer;
+    private Renderer rend;
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<Renderer>();
+        rend = GetComponent<Renderer>();
         // set position to ground
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit))
+        if (Physics.BoxCast(rend.bounds.center, transform.localScale * 0.5f, Vector3.down, out hit))
         {
-            transform.position = new Vector3(hit.point.x, hit.point.y + (renderer.bounds.max.y - renderer.bounds.min.y) / 2, hit.point.z);
+            transform.position = new Vector3(hit.point.x, hit.point.y + (rend.bounds.max.y - rend.bounds.min.y) / 2, hit.point.z);
         }
     }
 
