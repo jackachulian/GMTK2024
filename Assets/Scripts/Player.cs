@@ -117,8 +117,8 @@ public class Player : MonoBehaviour
         if (forward != Vector3.zero) buildPreview.transform.forward = forward;
 
         camParent.eulerAngles = oldCamAngles;
-        playerVelocity.x = (forward.x * dotVel);
-        playerVelocity.z = (forward.z * dotVel);
+        playerVelocity.x = (forward.x * dotVel) * levelData.playerScale;
+        playerVelocity.z = (forward.z * dotVel) * levelData.playerScale;
 
         // top speed logic
         if (dotVel > pSpeed)
@@ -132,13 +132,13 @@ public class Player : MonoBehaviour
         addedVel = new Vector3(Mathf.Max(Mathf.Abs(addedVel.x) - deaccel * (IsGrounded() ? 1f : airDeccelMult), 0f) * Mathf.Sign(addedVel.x), 0f, Mathf.Max(Mathf.Max(Mathf.Abs(addedVel.z) - deaccel * (IsGrounded() ? 1f : airDeccelMult), 0f) * Mathf.Sign(addedVel.z)));
 
         // gravity
-        if (!IsGrounded()) playerVelocity.y += gravity;
+        if (!IsGrounded()) playerVelocity.y += gravity * levelData.playerScale;
         else playerVelocity.y = 0;
 
         // jump logic
         if (IsGrounded() && jumpPressed)
         {
-            playerVelocity.y = jumpHeight;
+            playerVelocity.y = jumpHeight * levelData.playerScale;
         }
 
         if (playerVelocity.y > 0 && !jumpPressed)
