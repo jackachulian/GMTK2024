@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [SerializeField] TMPro.TextMeshProUGUI debugText;
 
     private Rigidbody rb;
+    private BuildableManager buildableManager;
     // private Collider collider;
     // [SerializeField] private InputActionAsset actionAsset;
     private Vector3 playerVelocity;
@@ -26,11 +27,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float airAccelMult = 0.5f;
     [SerializeField] private float airDeccelMult = 0.25f;
 
-    [SerializeField] private GameObject[] buildables;
     [SerializeField] private GameObject buildPreview;
-    [SerializeField] private MeshFilter buildPreviewMesh;
-
-    [System.NonSerialized] private int currentSelectedBuildable = 0;
 
     [SerializeField] private GameObject playerModel;
     
@@ -56,6 +53,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        buildableManager = GetComponent<BuildableManager>();
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -158,19 +157,14 @@ public class Player : MonoBehaviour
     {
         float v = value.Get<float>();
 
-        if (v != 0f) Instantiate(buildables[currentSelectedBuildable], buildPreview.transform.position, buildPreview.transform.rotation);
+        if (v != 0f) buildableManager.PlaceBuildable();
     }
 
     public void OnSelectBuildable(InputValue value)
     {
         float v = value.Get<float>();
 
-        if (v != 0f)
-        {
-            currentSelectedBuildable = (currentSelectedBuildable + 1) % buildables.Length;
-            // set mesh for preview
-            buildPreviewMesh.sharedMesh = buildables[currentSelectedBuildable].GetComponent<MeshFilter>().sharedMesh;
-        } 
+        if (v != 0f) buildableManager.CycleBuildableSelection();
     }
 
     public void OnMove(InputValue value)
