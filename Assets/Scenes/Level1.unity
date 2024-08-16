@@ -335,7 +335,9 @@ MonoBehaviour:
   airDeccelMult: 0.8
   buildables:
   - {fileID: 992564221274106826, guid: 803ddf8ac1fed3e4f9c13365789d05a2, type: 3}
+  - {fileID: 992564221274106826, guid: b9c3eabfce6c0bc4689eb6f4a3d6a755, type: 3}
   buildPreview: {fileID: 1270277925}
+  buildPreviewMesh: {fileID: 1270277927}
   playerModel: {fileID: 1331372916}
 --- !u!54 &324150533
 Rigidbody:
@@ -699,6 +701,7 @@ GameObject:
   - component: {fileID: 1270277926}
   - component: {fileID: 1270277928}
   - component: {fileID: 1270277927}
+  - component: {fileID: 1270277929}
   m_Layer: 0
   m_Name: BuildPreview
   m_TagString: Untagged
@@ -715,11 +718,11 @@ Transform:
   m_GameObject: {fileID: 1270277925}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.21}
-  m_LocalScale: {x: 1, y: 0.5, z: 1}
+  m_LocalPosition: {x: -0.97, y: 1.7, z: 2.058}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1331372917}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1270277927
 MeshFilter:
@@ -771,6 +774,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1270277929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270277925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72f16dcddf109264483a3c6ef2058147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1331372916
 GameObject:
   m_ObjectHideFlags: 0
@@ -802,8 +817,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1270277926}
+  m_Children: []
   m_Father: {fileID: 324150527}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1331372918
@@ -883,5 +897,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 183557224}
+  - {fileID: 1270277926}
   - {fileID: 324150527}
   - {fileID: 1134357732}

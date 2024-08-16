@@ -28,7 +28,9 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject[] buildables;
     [SerializeField] private GameObject buildPreview;
+    [SerializeField] private MeshFilter buildPreviewMesh;
 
+    [System.NonSerialized] private int currentSelectedBuildable = 0;
 
     [SerializeField] private GameObject playerModel;
     
@@ -81,8 +83,6 @@ public class Player : MonoBehaviour
         camParent.eulerAngles = new Vector3(camParent.eulerAngles.x + camRotateDir.y * camSens.y, camParent.eulerAngles.y + camRotateDir.x * camSens.x, 0f);
         // camParent.eulerAngles = new Vector3(camRotateDir.y * camSens.y, camRotateDir.x * camSens.x, 0f);
 
-        // decide which phys mode to use
-
         GeneralPhysics();
 
         // end of frame logic
@@ -106,6 +106,13 @@ public class Player : MonoBehaviour
             forward = camParent.TransformDirection(normalizedMoveDir);
             dotVel = Mathf.Max(startSpeed, dotVel + accel * (IsGrounded() ? 1f : airAccelMult));
         }
+
+        // set lateral position of build preview. vertical position is set in own script
+        Vector3 buildPreviewPos = buildPreview.transform.position;
+        buildPreviewPos.x = transform.position.x + forward.x * 2f;
+        buildPreviewPos.z = transform.position.z + forward.z * 2f;
+        buildPreview.transform.position = buildPreviewPos;
+        buildPreview.transform.forward = forward;
 
         camParent.eulerAngles = oldCamAngles;
         playerVelocity.x = (forward.x * dotVel);
@@ -151,7 +158,19 @@ public class Player : MonoBehaviour
     {
         float v = value.Get<float>();
 
-        if (v != 0f) Instantiate(buildables[0], buildPreview.transform.position, buildPreview.transform.rotation);
+        if (v != 0f) Instantiate(buildables[currentSelectedBuildable], buildPreview.transform.position, buildPreview.transform.rotation);
+    }
+
+    public void OnSelectBuildable(InputValue value)
+    {
+        float v = value.Get<float>();
+
+        if (v != 0f)
+        {
+            currentSelectedBuildable = (currentSelectedBuildable + 1) % buildables.Length;
+            // set mesh for preview
+            buildPreviewMesh.sharedMesh = buildables[currentSelectedBuildable].GetComponent<MeshFilter>().sharedMesh;
+        } 
     }
 
     public void OnMove(InputValue value)
