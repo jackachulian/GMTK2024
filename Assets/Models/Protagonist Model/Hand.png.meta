@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 13f62b6e61eeba74fae5a78847f11885
+<<<<<<< HEAD:Assets/Models/Protagonist Model Blender Files/Hand.png.meta
+guid: 560c482516228e64cb4f1d990dc71ac0
+=======
+guid: 4f9bc8f69f4a2654c995df3ab6ad5b70
+>>>>>>> d2a9f99b65fdd69f535b24afffa264987aea16d1:Assets/Models/Protagonist Model/Hand.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -95,6 +99,23 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+<<<<<<< HEAD:Assets/Models/Protagonist Model Blender Files/Hand.png.meta
+    buildTarget: Android
+=======
+    buildTarget: Windows Store Apps
+>>>>>>> d2a9f99b65fdd69f535b24afffa264987aea16d1:Assets/Models/Protagonist Model/Hand.png.meta
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1

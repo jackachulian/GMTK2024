@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: f86f8a28db076ae49bdc7dd7388ebb7c
+<<<<<<< HEAD:Assets/Models/Protagonist Model Blender Files/Hat.png.meta
+guid: 6b3f312a302315147bfbdd0df813e85f
+=======
+guid: 217633b9830bb4d4ca0cc469f4b32fe0
+>>>>>>> d2a9f99b65fdd69f535b24afffa264987aea16d1:Assets/Models/Protagonist Model/Hat.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -95,6 +99,23 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+<<<<<<< HEAD:Assets/Models/Protagonist Model Blender Files/Hat.png.meta
+    buildTarget: Android
+=======
+    buildTarget: Windows Store Apps
+>>>>>>> d2a9f99b65fdd69f535b24afffa264987aea16d1:Assets/Models/Protagonist Model/Hat.png.meta
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1

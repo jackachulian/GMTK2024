@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 51a93609f25d1084592cff68f11c8bb2
+<<<<<<< HEAD:Assets/Models/Protagonist Model Blender Files/Arm.png.meta
+guid: 4a87154a100b65848a8530677989dcdd
+=======
+guid: bb27468c9ae60504c94eb1783ddd7db2
+>>>>>>> d2a9f99b65fdd69f535b24afffa264987aea16d1:Assets/Models/Protagonist Model/Arm.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -95,6 +99,23 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+<<<<<<< HEAD:Assets/Models/Protagonist Model Blender Files/Arm.png.meta
+    buildTarget: Android
+=======
+    buildTarget: Windows Store Apps
+>>>>>>> d2a9f99b65fdd69f535b24afffa264987aea16d1:Assets/Models/Protagonist Model/Arm.png.meta
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1

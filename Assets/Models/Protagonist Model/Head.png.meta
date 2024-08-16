@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: e70281d24098f6448bf1f108015e803e
+<<<<<<< HEAD:Assets/Models/Protagonist Model Blender Files/Head.png.meta
+guid: 7a5c3ca15831d8349928679ff9c9cfc6
+=======
+guid: 0c07d337078b0144283077ddd659536f
+>>>>>>> d2a9f99b65fdd69f535b24afffa264987aea16d1:Assets/Models/Protagonist Model/Head.png.meta
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -95,6 +99,23 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+<<<<<<< HEAD:Assets/Models/Protagonist Model Blender Files/Head.png.meta
+    buildTarget: Android
+=======
+    buildTarget: Windows Store Apps
+>>>>>>> d2a9f99b65fdd69f535b24afffa264987aea16d1:Assets/Models/Protagonist Model/Head.png.meta
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
