@@ -200,7 +200,7 @@ public class Player : MonoBehaviour
     // TODO switch to CapsuleCast
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), 1.05f, ~layerMask);
+        return Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), 1.05f * levelData.playerScale, ~layerMask);
     }
 
     private bool IsWalled()
