@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Models/Protagonist Model Blender Files/protag.blend.meta
-guid: df99033b00415894da7981885ad5949d
-=======
-guid: 0046738953b31ea4b84486546cb301bb
->>>>>>> d2a9f99b65fdd69f535b24afffa264987aea16d1:Assets/Models/Protagonist Model/protag.blend.meta
+guid: 0302f718b992dfb4e9a2e1b1250d0f20
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -11,7 +7,7 @@ ModelImporter:
   materials:
     materialImportMode: 2
     materialName: 0
-    materialSearch: 1
+    materialSearch: 0
     materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
