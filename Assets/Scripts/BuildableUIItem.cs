@@ -32,6 +32,8 @@ public class BuildableUIItem : MonoBehaviour
         // set up model
         GameObject buildable = levelData.availableBuildables[buildableIndex];
         meshFilter.sharedMesh = buildable.GetComponent<MeshFilter>().sharedMesh;
+        //buildable.transform.localScale = new Vector3(buildable.GetComponent<Buildable>().scaleMult,buildable.GetComponent<Buildable>().scaleMult,buildable.GetComponent<Buildable>().scaleMult);
+        
         // meshRenderer.materials[0] = buildable.GetComponent<MeshRenderer>().materials[0];
         rend.material = new Material(buildable.GetComponent<Renderer>().sharedMaterial);
 

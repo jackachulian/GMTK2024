@@ -45,6 +45,7 @@ public class BuildableManager : MonoBehaviour
 
         // update preview mesh
         buildPreviewMesh.sharedMesh = buildables[currentSelectedBuildable].GetComponent<MeshFilter>().sharedMesh;
+        //buildPreviewMesh.transform.localScale = new Vector3(buildables[currentSelectedBuildable].GetComponent<Buildable>().scaleMult,buildables[currentSelectedBuildable].GetComponent<Buildable>().scaleMult,buildables[currentSelectedBuildable].GetComponent<Buildable>().scaleMult);
     }
 
     public void PlaceBuildable()
@@ -54,7 +55,7 @@ public class BuildableManager : MonoBehaviour
         // spawn gameobject
         Transform b = Instantiate(buildables[currentSelectedBuildable], buildPreview.transform.position, buildPreview.transform.rotation).transform;
         // buildables are always effected by player scale
-        b.localScale = b.localScale *= levelData.playerScale;
+        b.localScale = b.localScale *= levelData.playerScale * buildables[currentSelectedBuildable].GetComponent<Buildable>().scaleMult;
         buildableAmounts[currentSelectedBuildable] -= 1;
         buildUI.Refresh(currentSelectedBuildable);
         CycleBuildableSelection(0);

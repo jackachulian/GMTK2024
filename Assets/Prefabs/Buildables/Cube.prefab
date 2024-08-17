@@ -119,6 +119,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2edde4091c100c343aba07bef8f4d8e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scaleMult: 1
+  uiScaleMult: 5
 --- !u!54 &3668395448318796792
 Rigidbody:
   m_ObjectHideFlags: 0

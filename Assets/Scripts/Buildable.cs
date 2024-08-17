@@ -5,6 +5,7 @@ using UnityEngine;
 public class Buildable : MonoBehaviour
 {
     private Renderer rend;
+    public float scaleMult, uiScaleMult;
     // Start is called before the first frame update
     void Start()
     {
