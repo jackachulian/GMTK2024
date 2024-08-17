@@ -45,6 +45,9 @@ public class BuildableManager : MonoBehaviour
 
         // update preview mesh
         buildPreviewMesh.sharedMesh = buildables[currentSelectedBuildable].GetComponent<MeshFilter>().sharedMesh;
+
+        float mul = levelData.playerScale * buildables[currentSelectedBuildable].GetComponent<Buildable>().scaleMult;
+        buildPreview.transform.localScale = new Vector3(mul,mul,mul);
         //buildPreviewMesh.transform.localScale = new Vector3(buildables[currentSelectedBuildable].GetComponent<Buildable>().scaleMult,buildables[currentSelectedBuildable].GetComponent<Buildable>().scaleMult,buildables[currentSelectedBuildable].GetComponent<Buildable>().scaleMult);
     }
 
