@@ -9,6 +9,9 @@ public class LevelData : MonoBehaviour
     [SerializeField] public int[] amounts;
     [System.NonSerialized] public int[] startAmounts;
 
+    [SerializeField] public float scaleMin = 0.5f;
+    [SerializeField] public float scaleMax = 3f;
+
     [System.NonSerialized] public float playerScale = 1f;
     // for this level only
     [System.NonSerialized] public int collectablesFound = 0;
