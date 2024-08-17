@@ -8,7 +8,7 @@ public class LevelData : MonoBehaviour
     [SerializeField] public GameObject[] availableBuildables;
     [SerializeField] public int[] amounts;
 
-    public float playerScale = 1f;
+    [System.NonSerialized] public float playerScale = 1f;
     // for this level only
     [System.NonSerialized] public int collectablesFound = 0;
     public int collectablesNeeded;

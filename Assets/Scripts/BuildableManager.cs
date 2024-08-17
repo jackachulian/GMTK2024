@@ -10,6 +10,7 @@ public class BuildableManager : MonoBehaviour
 
     [SerializeField] private MeshFilter buildPreviewMesh;
     [SerializeField] private GameObject buildPreview;
+    [SerializeField] BuildableUI buildUI;
 
     [SerializeField] private LevelData levelData;
 
@@ -55,6 +56,7 @@ public class BuildableManager : MonoBehaviour
         // buildables are always effected by player scale
         b.localScale = b.localScale *= levelData.playerScale;
         buildableAmounts[currentSelectedBuildable] -= 1;
+        buildUI.Refresh(currentSelectedBuildable);
         CycleBuildableSelection(0);
     }
 
