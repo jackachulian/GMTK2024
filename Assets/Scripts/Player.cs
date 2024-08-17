@@ -52,6 +52,13 @@ public class Player : MonoBehaviour
     // layer 6 is nocollide layer
     int layerMask = 1 << 6;
 
+
+    [Space]
+    [SerializeField] private Animator anim;
+    [SerializeField] private AnimationClip walkingAnim, idleAnim, inAirAnim, placingAnim,jumpingAnim;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +82,19 @@ public class Player : MonoBehaviour
             debugText.text += "DotS: " + surfaceDot + "\n";
         }
 
+        anim.SetBool("isWalking",IsWalking());
+        anim.SetBool("isGrounded",IsGrounded());
+
+        if(anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == inAirAnim.name && IsGrounded()){
+            anim.Play(idleAnim.name);
+        }
+        // if(IsGrounded() && IsWalking()){
+        //     anim.Play(walkingAnim.name);
+        // }
+
+        Debug.Log("isGrounded " + IsGrounded());
+        Debug.Log("IsWalking " + IsWalking());
+
     }
 
     void FixedUpdate()
@@ -93,6 +113,10 @@ public class Player : MonoBehaviour
         groundedLastFrame = IsGrounded();
         walledLastFrame = IsWalled();
         rb.velocity = playerVelocity + addedVel;
+    }
+
+    private bool IsWalking(){
+        return Vector3.Dot(playerVelocity, forward) > 0.01;
     }
 
     private void GeneralPhysics()
@@ -149,6 +173,9 @@ public class Player : MonoBehaviour
 
     public void OnJump(InputValue value)
     {
+
+        anim.Play(jumpingAnim.name);
+
         float v = value.Get<float>();
 
         // 1 when pressed, 0 when not
@@ -158,6 +185,8 @@ public class Player : MonoBehaviour
 
     public void OnBuild(InputValue value)
     {
+        anim.Play(placingAnim.name);
+
         float v = value.Get<float>();
 
         if (v != 0f) buildableManager.PlaceBuildable();
