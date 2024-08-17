@@ -9,15 +9,19 @@ public class BuildableUIItem : MonoBehaviour
     [SerializeField] private Renderer rend;
     [SerializeField] private RawImage renderTextureImage;
     [SerializeField] TMPro.TextMeshProUGUI amountText;
+    [SerializeField] Animation updateAnim;
     [SerializeField] private Camera cam;
     // index of displayed item in leveldata
     private int index;
     private LevelData levelData;
 
-    public void Setup(int buildableIndex, LevelData levelData)
+    [SerializeField] Color fullResourceColor;
+    [SerializeField] Color emptyResourceColor;
+
+    public void Setup(int buildableIndex, LevelData ld)
     {
         index = buildableIndex;
-        this.levelData = levelData;
+        levelData = ld;
 
         // set up render texture
         RenderTexture tex = new RenderTexture(256, 256, 16, RenderTextureFormat.ARGB32);
@@ -43,5 +47,7 @@ public class BuildableUIItem : MonoBehaviour
     private void setAmountText(int amount)
     {
         amountText.text = "x " + amount;
+        amountText.color = Color.Lerp(emptyResourceColor, fullResourceColor, amount / (float) levelData.startAmounts[index]);
+        updateAnim.Play();
     }
 }
