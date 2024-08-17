@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // shared data between all objects in a level
 public class LevelData : MonoBehaviour
 {
     [SerializeField] public GameObject[] availableBuildables;
-    [SerializeField] public int[] amounts;
+    public int[] amounts;
     [System.NonSerialized] public int[] startAmounts;
 
     [System.NonSerialized] public float playerScale = 1f;
     // for this level only
     [System.NonSerialized] public int collectablesFound = 0;
+    public GameObject spawnPoint;
     public int collectablesNeeded;
 
     void Awake()

@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] LevelData levelData;
     [SerializeField] TMPro.TextMeshProUGUI debugText;
+    [SerializeField] GameObject objectsBuilt;
 
     private Rigidbody rb;
     private BuildableManager buildableManager;
@@ -60,12 +62,15 @@ public class Player : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
+
         rb = GetComponent<Rigidbody>();
         buildableManager = GetComponent<BuildableManager>();
 
-        Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+
+        //ResetPlayer();
+
     }
 
     // Update is called once per frame
@@ -96,6 +101,28 @@ public class Player : MonoBehaviour
         // Debug.Log("IsWalking " + IsWalking());
 
     }
+
+    public void ResetPlayer(){
+        transform.position = levelData.spawnPoint.transform.position;
+        transform.rotation = levelData.spawnPoint.transform.rotation;
+        levelData.playerScale = 1;
+        
+        while(objectsBuilt.transform.childCount > 0) {
+            DestroyImmediate(objectsBuilt.transform.GetChild(0).gameObject);
+        }
+
+        for(int i = 0; i < levelData.availableBuildables.Length; i++){
+            levelData.amounts[i] = levelData.startAmounts[i];
+            buildableManager.buildUI.Refresh(i);
+        }
+        buildableManager.disabled = false;
+    }
+
+    public void OnResetLevel(InputValue value)
+    {
+        ResetPlayer();
+    }
+
 
     void FixedUpdate()
     {
@@ -189,7 +216,7 @@ public class Player : MonoBehaviour
 
         float v = value.Get<float>();
 
-        if (v != 0f) buildableManager.PlaceBuildable();
+        if (v != 0f) buildableManager.PlaceBuildable(objectsBuilt.transform);
     }
 
     public void OnSelectBuildable(InputValue value)

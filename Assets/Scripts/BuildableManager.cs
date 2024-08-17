@@ -10,17 +10,18 @@ public class BuildableManager : MonoBehaviour
 
     [SerializeField] private MeshFilter buildPreviewMesh;
     [SerializeField] private GameObject buildPreview;
-    [SerializeField] BuildableUI buildUI;
+    [SerializeField] public BuildableUI buildUI;
 
     [SerializeField] private LevelData levelData;
 
-    private bool disabled = false;
+    public bool disabled = false;
 
     void Start()
     {
         buildables = levelData.availableBuildables;
         Debug.Log(buildables);
         buildableAmounts = levelData.amounts;
+        
     }
 
     public void CycleBuildableSelection(int delta = 1)
@@ -51,12 +52,12 @@ public class BuildableManager : MonoBehaviour
         //buildPreviewMesh.transform.localScale = new Vector3(buildables[currentSelectedBuildable].GetComponent<Buildable>().scaleMult,buildables[currentSelectedBuildable].GetComponent<Buildable>().scaleMult,buildables[currentSelectedBuildable].GetComponent<Buildable>().scaleMult);
     }
 
-    public void PlaceBuildable()
+    public void PlaceBuildable(Transform parent)
     {
         if (disabled) return;
 
         // spawn gameobject
-        Transform b = Instantiate(buildables[currentSelectedBuildable], buildPreview.transform.position, buildPreview.transform.rotation).transform;
+        Transform b = Instantiate(buildables[currentSelectedBuildable], buildPreview.transform.position, buildPreview.transform.rotation, parent).transform;
         // buildables are always effected by player scale
         b.localScale = b.localScale *= levelData.playerScale * buildables[currentSelectedBuildable].GetComponent<Buildable>().scaleMult;
         buildableAmounts[currentSelectedBuildable] -= 1;
