@@ -15,6 +15,7 @@ public class PlayerInputListener : MonoBehaviour {
     {
         Vector2 v = value.Get<Vector2>();
         movement.SetMoveDirection(v.x, v.y);
+        
     }
 
     public void OnCamRotate(InputValue value)

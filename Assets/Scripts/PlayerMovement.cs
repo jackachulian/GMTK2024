@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rb;
     
     // received inputs
-    private Vector3 moveDir;
+    public Vector3 moveDir;
     private bool jumpPressed = false;
     private Vector3 camRotateDir;
 
@@ -124,6 +124,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector3(rb.velocity.x, jumpHeight * scaleManager.currentScale, rb.velocity.z);
             animManager.PlayJumpAnimation();
+            jumpPressed = false;
         }
 
         if (rb.velocity.y > 0 && !jumpPressed)
@@ -134,9 +135,12 @@ public class PlayerMovement : MonoBehaviour
 
     // Set the move direction relative to the current camera.
     public void SetMoveDirection(float x, float z) {
-        Vector3 transformedDir = camParent.TransformDirection(new Vector3(x, 0, z));
-        transformedDir.y = 0;
-        moveDir = transformedDir;
+        // Vector3 transformedDir = camParent.TransformDirection(new Vector3(x, 0, z));
+        // transformedDir.y = 0;
+        // moveDir = transformedDir;
+
+        moveDir = new Vector3(x, 0, z);
+
     }
 
     public void SetCamRotateDirection(Vector3 direction) {
