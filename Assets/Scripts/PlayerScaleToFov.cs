@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerScaleToFov : MonoBehaviour
 {
-    private PlayerScaleManager playerScaleManager;
+    [SerializeField] private LevelData levelData;
     private Camera cam;
     private float scaleLastFrame = 1f;
 
@@ -14,16 +14,15 @@ public class PlayerScaleToFov : MonoBehaviour
     void Start()
     {
         cam = GetComponent<Camera>();
-        playerScaleManager = FindFirstObjectByType<PlayerScaleManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerScaleManager.currentScale != scaleLastFrame)
+        if (levelData.playerScale != scaleLastFrame)
         {
-            cam.fieldOfView = Mathf.Lerp(min, max, Mathf.InverseLerp(playerScaleManager.currentScale, LevelData.current.minScale, LevelData.current.maxScale));
+            cam.fieldOfView = Mathf.Lerp(min, max, (levelData.playerScale + 0.5f) / 3.5f);
         }
-        scaleLastFrame = playerScaleManager.currentScale;
+        scaleLastFrame = levelData.playerScale;
     }
 }
