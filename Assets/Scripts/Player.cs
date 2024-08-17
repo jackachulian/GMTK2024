@@ -92,8 +92,8 @@ public class Player : MonoBehaviour
         //     anim.Play(walkingAnim.name);
         // }
 
-        Debug.Log("isGrounded " + IsGrounded());
-        Debug.Log("IsWalking " + IsWalking());
+        // Debug.Log("isGrounded " + IsGrounded());
+        // Debug.Log("IsWalking " + IsWalking());
 
     }
 
