@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // takes scale manager from level data and updates objects
+
+// ====
+// JACK UPDATE: going to try to disable this scrpt entirely, objects can/probably should store and modify their scale via their transform. would be simpler
+
 public class ScaleManager : MonoBehaviour
 {
-    [SerializeField] private LevelData levelData;
+    [SerializeField] private PlayerScaleManager scaleManager;
     [SerializeField] private Transform[] scalableObjects;
     [System.NonSerialized] private Vector3[] baseScales;
 
@@ -23,14 +27,14 @@ public class ScaleManager : MonoBehaviour
 
     void Update()
     {
-        if (lastFrameScale != levelData.playerScale)
+        if (lastFrameScale != scaleManager.currentScale)
         {
             for (int i = 0; i < scalableObjects.Length; i++)
             {
-                scalableObjects[i].localScale = baseScales[i] * levelData.playerScale;
+                scalableObjects[i].localScale = baseScales[i] * scaleManager.currentScale;
             }
         }
 
-        lastFrameScale = levelData.playerScale;
+        lastFrameScale = scaleManager.currentScale;
     }
 }

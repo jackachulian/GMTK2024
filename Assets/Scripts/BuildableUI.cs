@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class BuildableUI : MonoBehaviour
 {
+    public static BuildableUI instance;
+
+
     [SerializeField] LevelData levelData;
     [SerializeField] GameObject listContainer;
     [SerializeField] GameObject uiItemPrefab;
     private BuildableUIItem[] items;
+
+    private void Awake() {
+        instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        items = new BuildableUIItem[levelData.availableBuildables.Length];
-        for (int i = 0; i < levelData.availableBuildables.Length; i++)
+        items = new BuildableUIItem[levelData.buildables.Length];
+        for (int i = 0; i < levelData.buildables.Length; i++)
         {
             items[i] = Instantiate(uiItemPrefab, listContainer.transform).GetComponent<BuildableUIItem>();
             items[i].Setup(i, levelData);
@@ -25,8 +33,8 @@ public class BuildableUI : MonoBehaviour
         
     }
 
-    public void Refresh(int i)
+    public void RefreshItem(int index)
     {
-        items[i].Refresh();
+        items[index].Refresh();
     }
 }

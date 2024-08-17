@@ -30,7 +30,7 @@ public class BuildableUIItem : MonoBehaviour
         renderTextureImage.texture = tex;
 
         // set up model
-        GameObject buildable = levelData.availableBuildables[buildableIndex];
+        GameObject buildable = levelData.buildables[buildableIndex];
         meshFilter.sharedMesh = buildable.GetComponent<MeshFilter>().sharedMesh;
         // meshRenderer.materials[0] = buildable.GetComponent<MeshRenderer>().materials[0];
         rend.material = new Material(buildable.GetComponent<Renderer>().sharedMaterial);
