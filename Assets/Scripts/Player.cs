@@ -29,9 +29,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float airAccelMult = 0.5f;
     [SerializeField] private float airDeccelMult = 0.25f;
 
-    [SerializeField] private float scaleMin = 0.5f;
-    [SerializeField] private float scaleMax = 3f;
-
     [SerializeField] private GameObject buildPreview;
 
     [SerializeField] private GameObject playerModel;
@@ -233,7 +230,7 @@ public class Player : MonoBehaviour
         // Debug.Log("Mouse scroll: " + v);
         if (v != 0)
         {
-            levelData.playerScale = Mathf.Clamp(levelData.playerScale + v / 400, scaleMin, scaleMax);
+            levelData.playerScale = Mathf.Clamp(levelData.playerScale + v / 400, levelData.scaleMin, levelData.scaleMax);
         }
     }
 
