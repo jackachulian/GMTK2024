@@ -113,6 +113,7 @@ public class Player : MonoBehaviour
             buildableManager.buildUI.Refresh(i);
         }
         buildableManager.disabled = false;
+        buildPreview.SetActive(true);
     }
 
     public void OnResetLevel(InputValue value)
