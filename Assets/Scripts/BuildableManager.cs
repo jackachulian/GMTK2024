@@ -21,6 +21,7 @@ public class BuildableManager : MonoBehaviour
         buildables = levelData.availableBuildables;
         Debug.Log(buildables);
         buildableAmounts = levelData.amounts;
+        CycleBuildableSelection(0);
         
     }
 
