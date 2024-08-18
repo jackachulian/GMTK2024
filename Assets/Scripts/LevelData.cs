@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
 
 // shared data between all objects in a level
@@ -22,12 +23,21 @@ public class LevelData : MonoBehaviour
     public GameObject collectiblesParent;
     [SerializeField] private TMP_Text collectibleText;
 
+    [SerializeField] private LevelCompleteWindow levelCompleteWindow;
+    [SerializeField] private PlayerInput playerInput;
+
     void Awake()
     {
         startAmounts = new int[amounts.Length];
         System.Array.Copy(amounts, startAmounts, amounts.Length);
         UpdateCollectibleText();
 
+    }
+
+    void Start()
+    {
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        playerInput.enabled = true;
     }
 
     public void UpdateCollectibleText(){
@@ -41,6 +51,8 @@ public class LevelData : MonoBehaviour
         if (collectablesFound >= collectablesNeeded)
         {
             Debug.Log("All collectables found!");
+            levelCompleteWindow.OpenMenu();
+            playerInput.enabled = false;
         }
     }
     
