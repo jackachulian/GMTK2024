@@ -206,7 +206,6 @@ public class Player : MonoBehaviour
         // gravity
         if (!IsGrounded()) 
         {
-            Debug.Log("Applying grav");
             playerVelocity.y += gravity * levelData.playerScale;
         }
         else playerVelocity.y = 0;
