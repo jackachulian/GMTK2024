@@ -98,15 +98,12 @@ public class Player : MonoBehaviour
         anim.SetBool("isWalking",IsWalking());
         anim.SetBool("isGrounded",IsGrounded());
 
-        if(anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == inAirAnim.name && IsGrounded()){
+        if(anim.GetCurrentAnimatorClipInfo(0) != null && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == inAirAnim.name && IsGrounded()){
             anim.Play(idleAnim.name);
         }
         // if(IsGrounded() && IsWalking()){
         //     anim.Play(walkingAnim.name);
         // }
-
-        // Debug.Log("isGrounded " + IsGrounded());
-        // Debug.Log("IsWalking " + IsWalking());
 
     }
 
@@ -165,7 +162,8 @@ public class Player : MonoBehaviour
         rb.velocity = playerVelocity + addedVel;
     }
 
-    private bool IsWalking(){
+    private bool IsWalking()
+    {
         return Vector3.Dot(playerVelocity, forward) > 0.01;
     }
 
@@ -206,7 +204,11 @@ public class Player : MonoBehaviour
         addedVel = new Vector3(Mathf.Max(Mathf.Abs(addedVel.x) - deaccel * (IsGrounded() ? 1f : airDeccelMult), 0f) * Mathf.Sign(addedVel.x), 0f, Mathf.Max(Mathf.Max(Mathf.Abs(addedVel.z) - deaccel * (IsGrounded() ? 1f : airDeccelMult), 0f) * Mathf.Sign(addedVel.z)));
 
         // gravity
-        if (!IsGrounded()) playerVelocity.y += gravity * levelData.playerScale;
+        if (!IsGrounded()) 
+        {
+            Debug.Log("Applying grav");
+            playerVelocity.y += gravity * levelData.playerScale;
+        }
         else playerVelocity.y = 0;
 
         // jump logic
@@ -286,7 +288,8 @@ public class Player : MonoBehaviour
 
     private bool IsWalled()
     {
-        return Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), playerModel.transform.forward, 0.55f, ~layerMask) && Physics.Raycast(new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), playerModel.transform.forward, 0.55f, ~layerMask);
+        return Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1 * levelData.playerScale, transform.position.z), playerModel.transform.forward, 0.55f * levelData.playerScale, ~layerMask) 
+        && Physics.Raycast(new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), playerModel.transform.forward, 0.55f * levelData.playerScale, ~layerMask);
     }
 
     void OnCollisionEnter(Collision collision)
