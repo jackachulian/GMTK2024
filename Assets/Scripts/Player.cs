@@ -125,6 +125,7 @@ public class Player : MonoBehaviour
         }
 
         for(int i = 0; i < levelData.collectablesNeeded; i++){
+            Debug.Log(i);
             levelData.collectiblesParent.transform.GetChild(i).gameObject.SetActive(true);
         }
 
