@@ -18,6 +18,7 @@ public class LevelData : MonoBehaviour
     [System.NonSerialized] public int collectablesFound = 0;
     public GameObject spawnPoint;
     public int collectablesNeeded;
+    public GameObject collectiblesParent;
 
     void Awake()
     {

@@ -9,7 +9,7 @@ public class Collectable : MonoBehaviour
         if (collider.gameObject.GetComponent<Player>() != null)
         {
             GameObject.Find("LevelData").GetComponent<LevelData>().updateCollectables(1);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
     }

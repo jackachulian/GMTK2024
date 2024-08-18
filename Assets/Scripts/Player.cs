@@ -112,6 +112,11 @@ public class Player : MonoBehaviour
             levelData.amounts[i] = levelData.startAmounts[i];
             buildableManager.buildUI.Refresh(i);
         }
+
+        for(int i = 0; i < levelData.collectablesNeeded; i++){
+            levelData.collectiblesParent.transform.GetChild(i).gameObject.SetActive(true);
+        }
+
         buildableManager.disabled = false;
         buildPreview.SetActive(true);
     }
