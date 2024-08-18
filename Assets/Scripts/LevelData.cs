@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 // shared data between all objects in a level
 public class LevelData : MonoBehaviour
@@ -19,17 +20,24 @@ public class LevelData : MonoBehaviour
     public GameObject spawnPoint;
     public int collectablesNeeded;
     public GameObject collectiblesParent;
+    [SerializeField] private TMP_Text collectibleText;
 
     void Awake()
     {
         startAmounts = new int[amounts.Length];
         System.Array.Copy(amounts, startAmounts, amounts.Length);
+        UpdateCollectibleText();
 
+    }
+
+    public void UpdateCollectibleText(){
+        collectibleText.text = collectablesFound + "/" + collectablesNeeded;
     }
 
     public void updateCollectables(int delta)
     {
         collectablesFound += delta;
+        UpdateCollectibleText();
         if (collectablesFound >= collectablesNeeded)
         {
             Debug.Log("All collectables found!");
