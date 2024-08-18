@@ -70,9 +70,6 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         buildableManager = GetComponent<BuildableManager>();
-
-        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-
         //ResetPlayer();
 
     }
