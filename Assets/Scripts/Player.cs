@@ -117,6 +117,9 @@ public class Player : MonoBehaviour
             levelData.collectiblesParent.transform.GetChild(i).gameObject.SetActive(true);
         }
 
+        levelData.collectablesFound = 0;
+        levelData.UpdateCollectibleText();
+
         buildableManager.disabled = false;
         buildPreview.SetActive(true);
     }
