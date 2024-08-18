@@ -18,7 +18,7 @@ public class LevelCompleteWindow : MonoBehaviour
     {
         gameObject.SetActive(true);
         animator.SetTrigger("Open");
-        EventSystem.current.SetSelectedGameObject(firstSelected);
+        // EventSystem.current.SetSelectedGameObject(firstSelected);
         UnityEngine.Cursor.lockState = CursorLockMode.None;
     }
 }

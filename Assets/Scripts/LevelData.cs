@@ -37,6 +37,12 @@ public class LevelData : MonoBehaviour
     void Start()
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        playerInput.enabled = false;
+        Invoke("EnableInput", 0.1f);
+    }
+
+    void EnableInput()
+    {
         playerInput.enabled = true;
     }
 
