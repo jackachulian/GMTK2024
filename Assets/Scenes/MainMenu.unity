@@ -1156,6 +1156,14 @@ PrefabInstance:
       propertyPath: m_fontStyle
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8345562593101777393, guid: caa6a808c5f53e24ba1a0bb6c9bd542b, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8345562593101777393, guid: caa6a808c5f53e24ba1a0bb6c9bd542b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6b6d6ac8d2927124c970f6173621ff79, type: 3}
     - target: {fileID: 9159983616006394506, guid: caa6a808c5f53e24ba1a0bb6c9bd542b, type: 3}
       propertyPath: m_Name
       value: CreditsButton
@@ -2460,6 +2468,10 @@ PrefabInstance:
       propertyPath: m_fontStyle
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8345562593101777393, guid: caa6a808c5f53e24ba1a0bb6c9bd542b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6b6d6ac8d2927124c970f6173621ff79, type: 3}
     - target: {fileID: 9159983616006394506, guid: caa6a808c5f53e24ba1a0bb6c9bd542b, type: 3}
       propertyPath: m_Name
       value: PlayButton
