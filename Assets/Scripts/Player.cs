@@ -6,6 +6,8 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    public static Player Instance {get; private set;}
+
     [SerializeField] LevelData levelData;
     [SerializeField] TMPro.TextMeshProUGUI debugText;
     [SerializeField] GameObject objectsBuilt;
@@ -57,6 +59,11 @@ public class Player : MonoBehaviour
     [SerializeField] private AnimationClip walkingAnim, idleAnim, inAirAnim, placingAnim,jumpingAnim;
 
 
+    public bool inCautionZone {get; set;}
+
+    private void Awake() {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start(){
@@ -234,6 +241,8 @@ public class Player : MonoBehaviour
 
     public void OnChangeScale(InputValue value)
     {
+        if (inCautionZone) return;
+
         float v = value.Get<float>();
 
         // Debug.Log("Mouse scroll: " + v);
