@@ -237,6 +237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5775750440774975883}
   - component: {fileID: 2620449075207001476}
+  - component: {fileID: 8677621790264758308}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -275,6 +276,19 @@ MonoBehaviour:
   levelData: {fileID: 0}
   listContainer: {fileID: 3833141220565406448}
   uiItemPrefab: {fileID: 934723373281631278, guid: a349af9d02d7a704b99f1d1a1cdf8778, type: 3}
+--- !u!114 &8677621790264758308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3321401619646750062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e7af19b428d65e43a903653d049edff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physMat: {fileID: 13400000, guid: 9d72887781056bc41b5d97c84913919f, type: 2}
 --- !u!1 &3833141220565406448
 GameObject:
   m_ObjectHideFlags: 0
