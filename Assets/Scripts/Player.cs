@@ -70,6 +70,13 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         buildableManager = GetComponent<BuildableManager>();
+
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+
+        if(levelData.availableBuildables.Length == 0){
+            buildPreview.gameObject.SetActive(false);
+        }
+
         //ResetPlayer();
 
     }
@@ -124,8 +131,13 @@ public class Player : MonoBehaviour
         levelData.collectablesFound = 0;
         levelData.UpdateCollectibleText();
 
-        buildableManager.disabled = false;
-        buildPreview.SetActive(true);
+        if(levelData.availableBuildables.Length == 0){
+            buildPreview.gameObject.SetActive(false);
+        }
+        else{
+            buildableManager.disabled = false;
+            buildPreview.SetActive(true);
+        }
     }
 
     public void OnResetLevel(InputValue value)
@@ -261,7 +273,7 @@ public class Player : MonoBehaviour
     {
         // Debug.Log("OnMove");
         Vector2 v = value.Get<Vector2>();
-        camRotateDir = new Vector3(v.x, v.y, 0);
+        camRotateDir = new Vector3(v.x*2.5f, v.y*2.5f, 0);
     }
 
     // TODO have constants reflect size of collider 
