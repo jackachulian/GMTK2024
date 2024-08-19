@@ -230,7 +230,7 @@ public class Player : MonoBehaviour
         // gravity
         if (!IsGrounded()) 
         {
-            playerVelocity.y += gravity * levelData.playerScale;
+            playerVelocity.y += gravity;
         }
         else playerVelocity.y = 0;
 
