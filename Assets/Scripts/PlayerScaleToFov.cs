@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerScaleToFov : MonoBehaviour
 {
-    [SerializeField] private LevelData levelData;
+    private LevelData levelData;
     private Camera cam;
     private float scaleLastFrame = 1f;
 
@@ -14,6 +14,7 @@ public class PlayerScaleToFov : MonoBehaviour
     void Start()
     {
         cam = GetComponent<Camera>();
+        levelData = FindFirstObjectByType<LevelData>();
     }
 
     // Update is called once per frame

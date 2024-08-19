@@ -6,22 +6,23 @@ using System;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] private PlayerInput playerInput;
+    private PlayerInput playerInput;
     [SerializeField] private PlayerPrefSetter[] prefSetters;
     void Start()
     {
         gameObject.SetActive(false);
+        playerInput = FindFirstObjectByType<PlayerInput>();
     }
     void OnEnable()
     {
-        playerInput.enabled = false;
+        if (playerInput) playerInput.enabled = false;
         UnityEngine.Cursor.lockState = CursorLockMode.None;
         Array.ForEach(prefSetters, pref => pref.Sync());
     }
 
     void OnDisable()
     {
-        playerInput.enabled = true;
+        if (playerInput) playerInput.enabled = true;
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
     }
 }

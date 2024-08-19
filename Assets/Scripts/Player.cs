@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] LevelData levelData;
     [SerializeField] TMPro.TextMeshProUGUI debugText;
-    [SerializeField] GameObject objectsBuilt;
+    GameObject objectsBuilt;
 
     private Rigidbody rb;
     private BuildableManager buildableManager;
@@ -83,6 +83,8 @@ public class Player : MonoBehaviour
             camParent = GameObject.Find("CamParent").transform;
         }
 
+        objectsBuilt = GameObject.Find("PlayerObjectsSpawned");
+
         if(levelData.availableBuildables.Length == 0){
             buildPreviewObject.gameObject.SetActive(false);
         }
@@ -110,7 +112,7 @@ public class Player : MonoBehaviour
         anim.SetBool("isWalking",IsWalking());
         anim.SetBool("isGrounded",IsGrounded());
 
-        if(anim.GetCurrentAnimatorClipInfo(0) != null && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == inAirAnim.name && IsGrounded()){
+        if(anim.GetCurrentAnimatorClipInfoCount(0) > 0 && anim.GetCurrentAnimatorClipInfo(0) != null && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == inAirAnim.name && IsGrounded()){
             anim.Play(idleAnim.name);
         }
         // if(IsGrounded() && IsWalking()){
@@ -234,7 +236,7 @@ public class Player : MonoBehaviour
         // gravity
         if (!IsGrounded()) 
         {
-            playerVelocity.y += gravity * (levelData.playerScale*0.7f + 0.3f);
+            playerVelocity.y += gravity * (levelData.playerScale*0.6f + 0.4f);
         }
         else playerVelocity.y = 0;
 

@@ -24,7 +24,7 @@ public class LevelData : MonoBehaviour
     [SerializeField] private TMP_Text collectibleText;
 
     [SerializeField] private LevelCompleteWindow levelCompleteWindow;
-    [SerializeField] private PlayerInput playerInput;
+    private PlayerInput playerInput;
     [Space]
     [SerializeField] public PressurePlate[] pressurePlates;
     [SerializeField] public MovingPlate[] movingPlates;
@@ -40,13 +40,15 @@ public class LevelData : MonoBehaviour
     void Start()
     {
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        playerInput = FindFirstObjectByType<PlayerInput>();
         playerInput.enabled = false;
         Invoke("EnableInput", 0.1f);
     }
 
     void EnableInput()
     {
-        playerInput.enabled = true;
+        if (playerInput) playerInput.enabled = true;
+        else Debug.LogWarning("player input not found");
     }
 
     public void UpdateCollectibleText(){
