@@ -8,7 +8,7 @@ public class FollowTransform : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (!toFollow) toFollow = FindFirstObjectByType<Player>().transform;
     }
 
     // Update is called once per frame

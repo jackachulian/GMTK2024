@@ -79,6 +79,10 @@ public class Player : MonoBehaviour
             levelData = FindObjectOfType<LevelData>();
         }
 
+        if (!camParent) {
+            camParent = GameObject.Find("CamParent").transform;
+        }
+
         if(levelData.availableBuildables.Length == 0){
             buildPreviewObject.gameObject.SetActive(false);
         }
@@ -230,14 +234,14 @@ public class Player : MonoBehaviour
         // gravity
         if (!IsGrounded()) 
         {
-            playerVelocity.y += gravity;
+            playerVelocity.y += gravity * (levelData.playerScale*0.7f + 0.3f);
         }
         else playerVelocity.y = 0;
 
         // jump logic
         if (IsGrounded() && jumpPressed)
         {
-            playerVelocity.y = jumpHeight * levelData.playerScale;
+            playerVelocity.y = jumpHeight * (levelData.playerScale*0.7f + 0.3f);
         }
 
         if (playerVelocity.y > 0 && !jumpPressed)
