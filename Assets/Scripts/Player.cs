@@ -31,7 +31,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float airAccelMult = 0.5f;
     [SerializeField] private float airDeccelMult = 0.25f;
 
-    [SerializeField] private GameObject buildPreview;
+    [SerializeField] private GameObject buildPreviewObject;
+    [SerializeField] private BuildPreview buildPreview;
 
     [SerializeField] private GameObject playerModel;
     
@@ -75,7 +76,7 @@ public class Player : MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
 
         if(levelData.availableBuildables.Length == 0){
-            buildPreview.gameObject.SetActive(false);
+            buildPreviewObject.gameObject.SetActive(false);
         }
 
         inCautionZone = false;
@@ -133,11 +134,11 @@ public class Player : MonoBehaviour
         levelData.UpdateCollectibleText();
 
         if(levelData.availableBuildables.Length == 0){
-            buildPreview.gameObject.SetActive(false);
+            buildPreviewObject.gameObject.SetActive(false);
         }
         else{
             buildableManager.disabled = false;
-            buildPreview.SetActive(true);
+            buildPreviewObject.SetActive(true);
         }
 
         foreach(PressurePlate p in levelData.pressurePlates){
@@ -194,12 +195,14 @@ public class Player : MonoBehaviour
             dotVel = Mathf.Max(startSpeed, dotVel + accel * (IsGrounded() ? 1f : airAccelMult));
         }
 
-        // set lateral position of build preview. vertical position is set in own script
-        Vector3 buildPreviewPos = buildPreview.transform.position;
-        buildPreviewPos.x = transform.position.x + forward.x * 2f * levelData.playerScale;
-        buildPreviewPos.z = transform.position.z + forward.z * 2f * levelData.playerScale;
-        buildPreview.transform.position = buildPreviewPos;
-        if (forward != Vector3.zero) buildPreview.transform.forward = forward;
+        // set position of build preview.
+        buildPreviewObject.transform.position = new Vector3(
+            transform.position.x + playerModel.transform.forward.x * 2f * levelData.playerScale,
+            transform.position.y,
+            transform.position.z + playerModel.transform.forward.z * 2f * levelData.playerScale
+        );
+        buildPreview.SnapToGround();
+        if (forward != Vector3.zero) buildPreviewObject.transform.forward = forward;
 
         camParent.eulerAngles = oldCamAngles;
         playerVelocity.x = (forward.x * dotVel) * levelData.playerScale;

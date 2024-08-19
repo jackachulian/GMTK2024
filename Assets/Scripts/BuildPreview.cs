@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// used by build preview
-public class SnapToGround : MonoBehaviour
+// controls y position of build preview
+public class BuildPreview : MonoBehaviour
 {
     private Renderer rend;
     [SerializeField] LevelData levelData;
@@ -18,9 +18,9 @@ public class SnapToGround : MonoBehaviour
         rend = GetComponent<Renderer>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    public void SnapToGround()
     {
+        if (!rend) return;
         // set position to ground
         // RaycastHit hit;
         if (Physics.BoxCast(new Vector3(rend.bounds.center.x, rend.bounds.center.y + 4f * levelData.playerScale, rend.bounds.center.z), 
@@ -36,17 +36,5 @@ public class SnapToGround : MonoBehaviour
             transform.position = pos;
         }
     }
-
-    public void OnDrawGizmos()
-    {
-        var r = GetComponent<Renderer>();
-        if (r == null)
-            return;
-        var bounds = r.bounds;
-        Gizmos.matrix = Matrix4x4.identity;
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(new Vector3(bounds.center.x,  hit.point.y + (rend.bounds.max.y - rend.bounds.min.y) / 2, bounds.center.z), bounds.extents * 2);
-
-        Gizmos.DrawWireSphere(hit.point, 1f);
-    }
 }
+
