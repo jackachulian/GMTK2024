@@ -201,9 +201,9 @@ public class Player : MonoBehaviour
 
         // set position of build preview.
         buildPreviewObject.transform.position = new Vector3(
-            transform.position.x + playerModel.transform.forward.x * 2f * levelData.playerScale,
+            transform.position.x + camParent.transform.forward.x * 2f * levelData.playerScale,
             transform.position.y,
-            transform.position.z + playerModel.transform.forward.z * 2f * levelData.playerScale
+            transform.position.z + camParent.transform.forward.z * 2f * levelData.playerScale
         );
         buildPreview.SnapToGround();
         if (forward != Vector3.zero) buildPreviewObject.transform.forward = forward;
