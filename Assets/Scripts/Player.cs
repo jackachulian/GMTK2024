@@ -236,7 +236,7 @@ public class Player : MonoBehaviour
         // gravity
         if (!IsGrounded()) 
         {
-            playerVelocity.y += gravity * (levelData.playerScale*0.6f + 0.4f);
+            playerVelocity.y += gravity * (levelData.playerScale*0.6f + 0.35f);
         }
         else playerVelocity.y = 0;
 
@@ -277,7 +277,13 @@ public class Player : MonoBehaviour
 
         float v = value.Get<float>();
 
-        if (v != 0f) buildableManager.PlaceBuildable(objectsBuilt.transform);
+        if (v != 0f) {
+            if (buildPreview.canPlace) {
+                buildableManager.PlaceBuildable(objectsBuilt.transform);
+            } else {
+                // maybe add error sfx / shake here
+            }
+        }
     }
 
     public void OnSelectBuildable(InputValue value)
