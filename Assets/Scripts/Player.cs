@@ -241,7 +241,7 @@ public class Player : MonoBehaviour
         // jump logic
         if (IsGrounded() && jumpPressed)
         {
-            playerVelocity.y = jumpHeight * (levelData.playerScale*0.7f + 0.3f);
+            playerVelocity.y = jumpHeight * (levelData.playerScale*0.6f + 0.4f);
         }
 
         if (playerVelocity.y > 0 && !jumpPressed)

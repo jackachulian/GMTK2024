@@ -5,14 +5,22 @@ using UnityEngine;
 // takes scale manager from level data and updates objects
 public class ScaleManager : MonoBehaviour
 {
-    [SerializeField] private LevelData levelData;
-    [SerializeField] private Transform[] scalableObjects;
-    [System.NonSerialized] private Vector3[] baseScales;
+    private LevelData levelData;
+    private Transform[] scalableObjects;
+    private Vector3[] baseScales;
 
     private float lastFrameScale = 1f;
 
     void Start()
     {
+        scalableObjects = new Transform[3];
+
+        scalableObjects[0] = GameObject.Find("Player").transform;
+        scalableObjects[1] = GameObject.Find("BuildPreview").transform;
+        scalableObjects[2] = GameObject.Find("CamParent").transform;
+
+        levelData = FindFirstObjectByType<LevelData>();
+
         baseScales = new Vector3[scalableObjects.Length];
         // store original scales
         for (int i = 0; i < scalableObjects.Length; i++)
