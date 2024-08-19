@@ -163,7 +163,11 @@ public class Player : MonoBehaviour
         playerVelocity = rb.velocity;
 
         // camera logic
-        camParent.eulerAngles = new Vector3(camParent.eulerAngles.x + camRotateDir.y * camSens.y, camParent.eulerAngles.y + camRotateDir.x * camSens.x, 0f);
+        camParent.eulerAngles = new Vector3(
+        camParent.eulerAngles.x + camRotateDir.y * camSens.y * PlayerPrefs.GetFloat("mouseSensMult") * (PlayerPrefs.GetInt("invertMouseY") == 0 ? 1 : -1), 
+        camParent.eulerAngles.y + camRotateDir.x * camSens.x * PlayerPrefs.GetFloat("mouseSensMult") * (PlayerPrefs.GetInt("invertMouseX") == 0 ? 1 : -1), 
+        0f
+        );
         // camParent.eulerAngles = new Vector3(camRotateDir.y * camSens.y, camRotateDir.x * camSens.x, 0f);
 
         GeneralPhysics();
@@ -248,6 +252,13 @@ public class Player : MonoBehaviour
         // 1 when pressed, 0 when not
         jumpPressed = (v != 0f);
 
+    }
+
+    public void OnPause(InputValue value)
+    {
+        float v = value.Get<float>();
+
+        if (v != 0f) FindObjectsByType<PauseMenu>(FindObjectsInactive.Include, FindObjectsSortMode.None)[0].gameObject.SetActive(true);
     }
 
     public void OnBuild(InputValue value)
