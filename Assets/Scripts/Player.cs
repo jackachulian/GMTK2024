@@ -75,6 +75,10 @@ public class Player : MonoBehaviour
 
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
 
+        if (!levelData) {
+            levelData = FindObjectOfType<LevelData>();
+        }
+
         if(levelData.availableBuildables.Length == 0){
             buildPreviewObject.gameObject.SetActive(false);
         }
