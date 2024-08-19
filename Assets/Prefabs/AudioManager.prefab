@@ -305,6 +305,14 @@ MonoBehaviour:
   music:
   - name: theme
     clip: {fileID: 8300000, guid: 47b07b1ead58ff4409155d761c45c2dc, type: 3}
-  sfx: []
+  sfx:
+  - name: click
+    clip: {fileID: 8300000, guid: 4b59c3cb200877b479e3c1edbeff4c1e, type: 3}
+  - name: build
+    clip: {fileID: 8300000, guid: 42b1127071e9d0c45a2d6b1c6868c607, type: 3}
+  - name: collect
+    clip: {fileID: 8300000, guid: dc8ecab8fe7ebcc4199f00b6c4485c91, type: 3}
+  - name: jump
+    clip: {fileID: 8300000, guid: 9746941f369a0ef448a4fab4ec35e446, type: 3}
   musicSource: {fileID: 4068474109468799188}
   sfxSource: {fileID: 578769216617272855}
