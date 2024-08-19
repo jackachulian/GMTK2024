@@ -164,8 +164,8 @@ public class Player : MonoBehaviour
 
         // camera logic
         camParent.eulerAngles = new Vector3(
-        camParent.eulerAngles.x + camRotateDir.y * camSens.y * PlayerPrefs.GetFloat("mouseSensMult") * (PlayerPrefs.GetInt("invertMouseY") == 0 ? 1 : -1), 
-        camParent.eulerAngles.y + camRotateDir.x * camSens.x * PlayerPrefs.GetFloat("mouseSensMult") * (PlayerPrefs.GetInt("invertMouseX") == 0 ? 1 : -1), 
+        camParent.eulerAngles.x + camRotateDir.y * camSens.y * PlayerPrefs.GetFloat("mouseSensMult", 1f) * (PlayerPrefs.GetInt("invertMouseY") == 0 ? 1 : -1), 
+        camParent.eulerAngles.y + camRotateDir.x * camSens.x * PlayerPrefs.GetFloat("mouseSensMult", 1f) * (PlayerPrefs.GetInt("invertMouseX") == 0 ? 1 : -1), 
         0f
         );
         // camParent.eulerAngles = new Vector3(camRotateDir.y * camSens.y, camRotateDir.x * camSens.x, 0f);
