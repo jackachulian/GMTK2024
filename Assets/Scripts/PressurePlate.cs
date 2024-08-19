@@ -7,7 +7,8 @@ public class PressurePlate : MonoBehaviour
     [SerializeField] Material pressedMaterial,notPressedMaterial;
     [SerializeField] MovingPlate plateToMove;
     [SerializeField] Renderer matRenderer;
-    private int pressed;
+    public int pressed;
+    private Vector3 spawnPoint;
 
     void Start(){
         pressed = 0;

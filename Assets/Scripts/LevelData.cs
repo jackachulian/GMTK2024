@@ -25,6 +25,9 @@ public class LevelData : MonoBehaviour
 
     [SerializeField] private LevelCompleteWindow levelCompleteWindow;
     [SerializeField] private PlayerInput playerInput;
+    [Space]
+    [SerializeField] public PressurePlate[] pressurePlates;
+    [SerializeField] public MovingPlate[] movingPlates;
 
     void Awake()
     {

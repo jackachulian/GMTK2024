@@ -8,9 +8,15 @@ public class MovingPlate : MonoBehaviour
     public bool isMoving;
     private int current;
     [SerializeField] int speed;
+    private Vector3 spawnPoint;
 
     void Awake(){
         current = 0;
+        spawnPoint = transform.position;
+    }
+
+    public void ResetPosition(){
+        transform.position = spawnPoint;
     }
 
     void FixedUpdate(){

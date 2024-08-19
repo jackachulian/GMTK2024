@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
 
     private void Awake() {
         Instance = this;
+        inCautionZone = false;
     }
 
     // Start is called before the first frame update
@@ -77,9 +78,11 @@ public class Player : MonoBehaviour
             buildPreview.gameObject.SetActive(false);
         }
 
-        //ResetPlayer();
+        inCautionZone = false;
 
+        //ResetPlayer();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -136,6 +139,16 @@ public class Player : MonoBehaviour
             buildableManager.disabled = false;
             buildPreview.SetActive(true);
         }
+
+        foreach(PressurePlate p in levelData.pressurePlates){
+            p.pressed = 0;
+        }
+
+        foreach(MovingPlate p in levelData.movingPlates){
+            p.ResetPosition();
+        }
+
+        inCautionZone = false;
     }
 
     public void OnResetLevel(InputValue value)
