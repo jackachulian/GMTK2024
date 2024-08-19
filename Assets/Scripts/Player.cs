@@ -206,7 +206,7 @@ public class Player : MonoBehaviour
             transform.position.z + camParent.transform.forward.z * 2f * levelData.playerScale
         );
         buildPreview.SnapToGround();
-        if (forward != Vector3.zero) buildPreviewObject.transform.forward = forward;
+        if (forward != Vector3.zero) buildPreviewObject.transform.forward = camParent.transform.forward;
 
         camParent.eulerAngles = oldCamAngles;
         playerVelocity.x = (forward.x * dotVel) * levelData.playerScale;
