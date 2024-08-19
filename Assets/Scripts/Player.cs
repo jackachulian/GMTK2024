@@ -75,6 +75,10 @@ public class Player : MonoBehaviour
 
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
 
+        if (!levelData) {
+            levelData = FindObjectOfType<LevelData>();
+        }
+
         if(levelData.availableBuildables.Length == 0){
             buildPreviewObject.gameObject.SetActive(false);
         }
@@ -164,8 +168,8 @@ public class Player : MonoBehaviour
 
         // camera logic
         camParent.eulerAngles = new Vector3(
-        camParent.eulerAngles.x + camRotateDir.y * camSens.y * PlayerPrefs.GetFloat("mouseSensMult") * (PlayerPrefs.GetInt("invertMouseY") == 0 ? 1 : -1), 
-        camParent.eulerAngles.y + camRotateDir.x * camSens.x * PlayerPrefs.GetFloat("mouseSensMult") * (PlayerPrefs.GetInt("invertMouseX") == 0 ? 1 : -1), 
+        camParent.eulerAngles.x + camRotateDir.y * camSens.y * PlayerPrefs.GetFloat("mouseSensMult", 1f) * (PlayerPrefs.GetInt("invertMouseY") == 0 ? 1 : -1), 
+        camParent.eulerAngles.y + camRotateDir.x * camSens.x * PlayerPrefs.GetFloat("mouseSensMult", 1f) * (PlayerPrefs.GetInt("invertMouseX") == 0 ? 1 : -1), 
         0f
         );
         // camParent.eulerAngles = new Vector3(camRotateDir.y * camSens.y, camRotateDir.x * camSens.x, 0f);
@@ -201,12 +205,12 @@ public class Player : MonoBehaviour
 
         // set position of build preview.
         buildPreviewObject.transform.position = new Vector3(
-            transform.position.x + playerModel.transform.forward.x * 2f * levelData.playerScale,
+            transform.position.x + camParent.transform.forward.x * 2f * levelData.playerScale,
             transform.position.y,
-            transform.position.z + playerModel.transform.forward.z * 2f * levelData.playerScale
+            transform.position.z + camParent.transform.forward.z * 2f * levelData.playerScale
         );
         buildPreview.SnapToGround();
-        if (forward != Vector3.zero) buildPreviewObject.transform.forward = forward;
+        if (forward != Vector3.zero) buildPreviewObject.transform.forward = camParent.transform.forward;
 
         camParent.eulerAngles = oldCamAngles;
         playerVelocity.x = (forward.x * dotVel) * levelData.playerScale;

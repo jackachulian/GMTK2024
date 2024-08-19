@@ -16,6 +16,7 @@ public class BuildPreview : MonoBehaviour
     void Start()
     {
         rend = GetComponent<Renderer>();
+        levelData = FindObjectOfType<LevelData>();
     }
 
     public void SnapToGround()

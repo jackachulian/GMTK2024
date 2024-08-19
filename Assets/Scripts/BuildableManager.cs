@@ -18,6 +18,7 @@ public class BuildableManager : MonoBehaviour
 
     void Start()
     {
+        levelData = FindObjectOfType<LevelData>();
         buildables = levelData.availableBuildables;
         Debug.Log(buildables);
         buildableAmounts = levelData.amounts;
