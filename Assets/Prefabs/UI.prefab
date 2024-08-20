@@ -346,6 +346,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 2141149001085838015}
   animator: {fileID: 8812475108017687379}
+  winText1: {fileID: 6124417196048800855}
+  winText2: {fileID: 8126487624528312809}
+  levelSelectButton: {fileID: 7155783354786238688}
+  continueButton: {fileID: 2141149001085838015}
 --- !u!1 &1118747593121028265
 GameObject:
   m_ObjectHideFlags: 0
