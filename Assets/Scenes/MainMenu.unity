@@ -182,11 +182,8 @@ MonoBehaviour:
   m_text: 'Game created by threehalves, infinityJKA, and Jackachulian.
 
 
-    Assets
-    from ______ were used.
-
-
-    install bipole '
+    Made
+    as part of the 2024 GMTK game jam.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a48211ec7d1ade34b827907a8f02e245, type: 2}
   m_sharedMaterial: {fileID: -6836120876768779066, guid: a48211ec7d1ade34b827907a8f02e245, type: 2}
@@ -213,8 +210,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 75
+  m_fontSizeBase: 75
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -1520,7 +1517,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 362, y: 344.93903}
+  m_AnchoredPosition: {x: 360, y: 341}
   m_SizeDelta: {x: -1160.792, y: -823.5728}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1060736128
@@ -1570,8 +1567,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 75
-  m_fontSizeBase: 75
+  m_fontSize: 90
+  m_fontSizeBase: 90
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
