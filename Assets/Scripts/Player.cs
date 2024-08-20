@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     private Vector3 dashDirection;
     private Vector3 forward;
     private bool jumpPressed = false;
+    private bool jumpPressedSinceLastTick = false;
     [System.NonSerialized] public float dotVel;
     private float surfaceDot = -2;
     private float surfaceDotLastFrame;
@@ -95,7 +96,7 @@ public class Player : MonoBehaviour
         //ResetPlayer();
     }
 
-
+    bool changingScale = false;
     // Update is called once per frame
     void Update()
     {
@@ -187,19 +188,20 @@ public class Player : MonoBehaviour
 
         if (levelData.playerScale != targetScale) {
             levelData.playerScale = Mathf.MoveTowards(levelData.playerScale, targetScale, Time.fixedDeltaTime*scaleSpeed);
-            if (levelData.playerScale == targetScale) {
+            changingScale = levelData.playerScale != targetScale;
+            if (!changingScale) {
                 anim.Play(idleAnim.name);
             }
-            playerVelocity = Vector3.MoveTowards(playerVelocity, Vector3.zero, 0.1f);
-        } else {
-            GeneralPhysics();
         }
+
+        GeneralPhysics();
 
         // end of frame logic
         // 'frame' in this case actually means each physics sim tick... oops
         surfaceDotLastFrame = surfaceDot;
         groundedLastFrame = IsGrounded();
         walledLastFrame = IsWalled();
+        jumpPressedSinceLastTick = false;
         rb.velocity = playerVelocity + addedVel;
     }
 
@@ -214,9 +216,10 @@ public class Player : MonoBehaviour
         Vector3 oldCamAngles = camParent.eulerAngles;
         camParent.eulerAngles = new Vector3(0f, camParent.eulerAngles.y + camRotateDir.x * -camSens.x, 0f);
         // camParent.eulerAngles = new Vector3(0f, camRotateDir.x * camSens.x, 0f);
-        if (moveDir != Vector3.zero) 
+        var dir = changingScale ? Vector3.zero : moveDir;
+        if (dir != Vector3.zero) 
         {
-            normalizedMoveDir = Vector3.Normalize(moveDir);
+            normalizedMoveDir = Vector3.Normalize(dir);
             forward = camParent.TransformDirection(normalizedMoveDir);
             dotVel = Mathf.Max(startSpeed, dotVel + accel * (IsGrounded() ? 1f : airAccelMult));
         }
@@ -247,7 +250,8 @@ public class Player : MonoBehaviour
             dotVel -= accel;
         }
 
-        if (moveDir != Vector3.zero) playerModel.transform.forward = forward;
+        var dir = changingScale ? Vector3.zero : moveDir;
+        if (dir != Vector3.zero) playerModel.transform.forward = forward;
         else dotVel = Mathf.Max(dotVel - deaccel * (IsGrounded() ? 1f : airDeccelMult), 0f);
 
         addedVel = new Vector3(Mathf.Max(Mathf.Abs(addedVel.x) - deaccel * (IsGrounded() ? 1f : airDeccelMult), 0f) * Mathf.Sign(addedVel.x), 0f, Mathf.Max(Mathf.Max(Mathf.Abs(addedVel.z) - deaccel * (IsGrounded() ? 1f : airDeccelMult), 0f) * Mathf.Sign(addedVel.z)));
@@ -260,9 +264,9 @@ public class Player : MonoBehaviour
         else playerVelocity.y = 0;
 
         // jump logic
-        if (IsGrounded() && jumpPressed)
+        if (IsGrounded() && jumpPressedSinceLastTick && !changingScale)
         {
-            playerVelocity.y = jumpHeight * (levelData.playerScale*0.6f + 0.4f);
+            playerVelocity.y = jumpHeight * (levelData.playerScale*0.65f + 0.3f);
         }
 
         if (playerVelocity.y > 0 && !jumpPressed)
@@ -282,7 +286,7 @@ public class Player : MonoBehaviour
 
         // 1 when pressed, 0 when not
         jumpPressed = (v != 0f);
-
+        if (jumpPressed) jumpPressedSinceLastTick = true;
     }
 
     public void OnPause(InputValue value)
