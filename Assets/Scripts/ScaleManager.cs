@@ -16,8 +16,15 @@ public class ScaleManager : MonoBehaviour
         scalableObjects = new Transform[3];
 
         scalableObjects[0] = GameObject.Find("Player").transform;
-        scalableObjects[1] = GameObject.Find("BuildPreview").transform;
-        scalableObjects[2] = GameObject.Find("CamParent").transform;
+        if (GameObject.Find("BuildPreview")) 
+        {
+            scalableObjects[1] = GameObject.Find("BuildPreview").transform;
+            scalableObjects[2] = GameObject.Find("CamParent").transform;
+        }
+        else
+        {
+            scalableObjects[1] = GameObject.Find("CamParent").transform;
+        }
 
         levelData = FindFirstObjectByType<LevelData>();
 
@@ -35,7 +42,7 @@ public class ScaleManager : MonoBehaviour
         {
             for (int i = 0; i < scalableObjects.Length; i++)
             {
-                scalableObjects[i].localScale = baseScales[i] * levelData.playerScale;
+                if (scalableObjects[i]) scalableObjects[i].localScale = baseScales[i] * levelData.playerScale;
             }
         }
 
