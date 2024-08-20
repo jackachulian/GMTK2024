@@ -27,8 +27,10 @@ public class AudioManager : MonoBehaviour
     public void PlayMusic(string name){
         Sound s = Array.Find(music, x => x.name == name);
 
-        musicSource.clip = s.clip;
-        musicSource.Play();
+        if(s.clip != musicSource.clip){
+            musicSource.clip = s.clip;
+            musicSource.Play();
+        }
     }
 
     public void PlaySFX(string name){
