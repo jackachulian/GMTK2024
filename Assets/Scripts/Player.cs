@@ -264,7 +264,7 @@ public class Player : MonoBehaviour
         else playerVelocity.y = 0;
 
         // jump logic
-        if (IsGrounded() && jumpPressedSinceLastTick && !changingScale)
+        if (IsGrounded() && jumpPressed && !changingScale)
         {
             playerVelocity.y = jumpHeight * (levelData.playerScale*0.65f + 0.3f);
         }
@@ -277,12 +277,13 @@ public class Player : MonoBehaviour
 
     public void OnJump(InputValue value)
     {
-
-        anim.Play(jumpingAnim.name);
-
         float v = value.Get<float>();
 
-        if(IsGrounded()){AudioManager.Instance.PlaySFX("jump");}
+        if (v != 0f)
+        {
+            anim.Play(jumpingAnim.name);
+            if(IsGrounded()){AudioManager.Instance.PlaySFX("jump");}
+        }
 
         // 1 when pressed, 0 when not
         jumpPressed = (v != 0f);
