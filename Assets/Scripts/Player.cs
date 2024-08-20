@@ -259,6 +259,8 @@ public class Player : MonoBehaviour
 
         float v = value.Get<float>();
 
+        if(IsGrounded()){AudioManager.Instance.PlaySFX("jump");}
+
         // 1 when pressed, 0 when not
         jumpPressed = (v != 0f);
 
@@ -276,6 +278,8 @@ public class Player : MonoBehaviour
         anim.Play(placingAnim.name);
 
         float v = value.Get<float>();
+
+        AudioManager.Instance.PlaySFX("build");
 
         if (v != 0f) buildableManager.PlaceBuildable(objectsBuilt.transform);
     }

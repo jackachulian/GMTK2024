@@ -31,6 +31,7 @@ Transform:
   m_Children:
   - {fileID: 6800560759846615010}
   - {fileID: 2013956635469433343}
+  - {fileID: 7835689847354257998}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4010326075949642420
@@ -256,7 +257,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelData: {fileID: 0}
   debugText: {fileID: 0}
-  objectsBuilt: {fileID: 0}
   camSens: {x: 0.09, y: -0.1}
   camParent: {fileID: 0}
   gravity: -1
@@ -351,6 +351,68 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
+--- !u!1001 &6235609607003371006
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8783203847423277509}
+    m_Modifications:
+    - target: {fileID: 4194156927415846832, guid: 09ff26c06605cf340b73e7abca671da7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.625536
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194156927415846832, guid: 09ff26c06605cf340b73e7abca671da7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.724657
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194156927415846832, guid: 09ff26c06605cf340b73e7abca671da7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -17.964214
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194156927415846832, guid: 09ff26c06605cf340b73e7abca671da7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194156927415846832, guid: 09ff26c06605cf340b73e7abca671da7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194156927415846832, guid: 09ff26c06605cf340b73e7abca671da7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194156927415846832, guid: 09ff26c06605cf340b73e7abca671da7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194156927415846832, guid: 09ff26c06605cf340b73e7abca671da7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194156927415846832, guid: 09ff26c06605cf340b73e7abca671da7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4194156927415846832, guid: 09ff26c06605cf340b73e7abca671da7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386179571365554055, guid: 09ff26c06605cf340b73e7abca671da7, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 09ff26c06605cf340b73e7abca671da7, type: 3}
+--- !u!4 &7835689847354257998 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4194156927415846832, guid: 09ff26c06605cf340b73e7abca671da7, type: 3}
+  m_PrefabInstance: {fileID: 6235609607003371006}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8259136266337058085
 PrefabInstance:
   m_ObjectHideFlags: 0

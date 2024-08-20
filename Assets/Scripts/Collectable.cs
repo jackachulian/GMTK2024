@@ -10,6 +10,7 @@ public class Collectable : MonoBehaviour
         if (collider.gameObject.GetComponent<Player>() != null)
         {
             GameObject.Find("LevelData").GetComponent<LevelData>().updateCollectables(1);
+            AudioManager.Instance.PlaySFX("collect");
             gameObject.SetActive(false);
         }
 
