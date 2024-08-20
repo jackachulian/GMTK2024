@@ -219,8 +219,9 @@ public class Player : MonoBehaviour
         if (forward != Vector3.zero) buildPreviewObject.transform.forward = camParent.transform.forward;
 
         camParent.eulerAngles = oldCamAngles;
-        playerVelocity.x = (forward.x * dotVel) * levelData.playerScale;
-        playerVelocity.z = (forward.z * dotVel) * levelData.playerScale;
+        float speedMult = (levelData.playerScale > 1f) ? (levelData.playerScale*0.6f + 0.4f) : levelData.playerScale;
+        playerVelocity.x = forward.x * dotVel * speedMult;
+        playerVelocity.z = forward.z * dotVel * speedMult;
 
         // top speed logic
         if (dotVel > pSpeed)

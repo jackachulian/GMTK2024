@@ -10,7 +10,7 @@ public class BuildableManager : MonoBehaviour
 
     [SerializeField] private MeshFilter buildPreviewMesh;
     [SerializeField] private GameObject buildPreview;
-    [SerializeField] public BuildableUI buildUI;
+    public BuildableUI buildUI;
 
     [SerializeField] private LevelData levelData;
 
@@ -18,8 +18,9 @@ public class BuildableManager : MonoBehaviour
 
     void Start()
     {
-        levelData = FindObjectOfType<LevelData>();
+        levelData = FindFirstObjectByType<LevelData>();
         buildables = levelData.availableBuildables;
+        buildUI = FindFirstObjectByType<BuildableUI>();
         Debug.Log(buildables);
         buildableAmounts = levelData.amounts;
         CycleBuildableSelection(0);
