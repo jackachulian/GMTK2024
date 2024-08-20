@@ -282,6 +282,8 @@ MonoBehaviour:
   inAirAnim: {fileID: 7055258384036259934, guid: 0302f718b992dfb4e9a2e1b1250d0f20, type: 3}
   placingAnim: {fileID: 3713695633981836765, guid: 0302f718b992dfb4e9a2e1b1250d0f20, type: 3}
   jumpingAnim: {fileID: -7130173953309157469, guid: 0302f718b992dfb4e9a2e1b1250d0f20, type: 3}
+  holdingAnim: {fileID: 7259397865976162737, guid: 0302f718b992dfb4e9a2e1b1250d0f20, type: 3}
+  scaleSpeed: 1
 --- !u!114 &6737041240687528897
 MonoBehaviour:
   m_ObjectHideFlags: 0

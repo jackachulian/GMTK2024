@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
     private Vector3 dashDirection;
     private Vector3 forward;
     private bool jumpPressed = false;
+    private bool jumpPressedSinceLastTick = false;
     [System.NonSerialized] public float dotVel;
     private float surfaceDot = -2;
     private float surfaceDotLastFrame;
@@ -57,7 +58,7 @@ public class Player : MonoBehaviour
 
     [Space]
     [SerializeField] private Animator anim;
-    [SerializeField] private AnimationClip walkingAnim, idleAnim, inAirAnim, placingAnim,jumpingAnim;
+    [SerializeField] private AnimationClip walkingAnim, idleAnim, inAirAnim, placingAnim,jumpingAnim,holdingAnim;
 
 
     public bool inCautionZone {get; set;}
@@ -65,6 +66,7 @@ public class Player : MonoBehaviour
     private void Awake() {
         Instance = this;
         inCautionZone = false;
+        targetScale = 1f;
     }
 
     // Start is called before the first frame update
@@ -94,7 +96,7 @@ public class Player : MonoBehaviour
         //ResetPlayer();
     }
 
-
+    bool changingScale = false;
     // Update is called once per frame
     void Update()
     {
@@ -109,16 +111,16 @@ public class Player : MonoBehaviour
             debugText.text += "DotS: " + surfaceDot + "\n";
         }
 
+        // if(IsGrounded() && IsWalking()){
+        //     anim.Play(walkingAnim.name);
+        // }
+
         anim.SetBool("isWalking",IsWalking());
         anim.SetBool("isGrounded",IsGrounded());
 
         if(anim.GetCurrentAnimatorClipInfoCount(0) > 0 && anim.GetCurrentAnimatorClipInfo(0) != null && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == inAirAnim.name && IsGrounded()){
             anim.Play(idleAnim.name);
         }
-        // if(IsGrounded() && IsWalking()){
-        //     anim.Play(walkingAnim.name);
-        // }
-
     }
 
     public void ResetPlayer(){
@@ -167,6 +169,8 @@ public class Player : MonoBehaviour
         ResetPlayer();
     }
 
+    float targetScale = 1f;
+    [SerializeField] private float scaleSpeed = 8f;
 
     void FixedUpdate()
     {
@@ -180,6 +184,16 @@ public class Player : MonoBehaviour
         );
         // camParent.eulerAngles = new Vector3(camRotateDir.y * camSens.y, camRotateDir.x * camSens.x, 0f);
 
+        UpdateCamera();
+
+        if (levelData.playerScale != targetScale) {
+            levelData.playerScale = Mathf.MoveTowards(levelData.playerScale, targetScale, Time.fixedDeltaTime*scaleSpeed);
+            changingScale = levelData.playerScale != targetScale;
+            if (!changingScale) {
+                anim.Play(idleAnim.name);
+            }
+        }
+
         GeneralPhysics();
 
         // end of frame logic
@@ -187,6 +201,7 @@ public class Player : MonoBehaviour
         surfaceDotLastFrame = surfaceDot;
         groundedLastFrame = IsGrounded();
         walledLastFrame = IsWalled();
+        jumpPressedSinceLastTick = false;
         rb.velocity = playerVelocity + addedVel;
     }
 
@@ -195,20 +210,21 @@ public class Player : MonoBehaviour
         return Vector3.Dot(playerVelocity, forward) > 0.01;
     }
 
-    private void GeneralPhysics()
-    {
-        // player move/run logic
+    private void UpdateCamera() {
+          // player move/run logic
         // get forward direction based on cam, temporarily remove x rotation
         Vector3 oldCamAngles = camParent.eulerAngles;
         camParent.eulerAngles = new Vector3(0f, camParent.eulerAngles.y + camRotateDir.x * -camSens.x, 0f);
         // camParent.eulerAngles = new Vector3(0f, camRotateDir.x * camSens.x, 0f);
-        if (moveDir != Vector3.zero) 
+        var dir = changingScale ? Vector3.zero : moveDir;
+        if (dir != Vector3.zero) 
         {
-            normalizedMoveDir = Vector3.Normalize(moveDir);
+            normalizedMoveDir = Vector3.Normalize(dir);
             forward = camParent.TransformDirection(normalizedMoveDir);
             dotVel = Mathf.Max(startSpeed, dotVel + accel * (IsGrounded() ? 1f : airAccelMult));
         }
 
+        
         // set position of build preview.
         buildPreviewObject.transform.position = new Vector3(
             transform.position.x + camParent.transform.forward.x * 2f * levelData.playerScale,
@@ -217,8 +233,13 @@ public class Player : MonoBehaviour
         );
         buildPreview.SnapToGround();
         if (forward != Vector3.zero) buildPreviewObject.transform.forward = camParent.transform.forward;
+        
 
         camParent.eulerAngles = oldCamAngles;
+    }
+
+    private void GeneralPhysics()
+    {
         float speedMult = (levelData.playerScale > 1f) ? (levelData.playerScale*0.6f + 0.4f) : levelData.playerScale;
         playerVelocity.x = forward.x * dotVel * speedMult;
         playerVelocity.z = forward.z * dotVel * speedMult;
@@ -229,7 +250,8 @@ public class Player : MonoBehaviour
             dotVel -= accel;
         }
 
-        if (moveDir != Vector3.zero) playerModel.transform.forward = forward;
+        var dir = changingScale ? Vector3.zero : moveDir;
+        if (dir != Vector3.zero) playerModel.transform.forward = forward;
         else dotVel = Mathf.Max(dotVel - deaccel * (IsGrounded() ? 1f : airDeccelMult), 0f);
 
         addedVel = new Vector3(Mathf.Max(Mathf.Abs(addedVel.x) - deaccel * (IsGrounded() ? 1f : airDeccelMult), 0f) * Mathf.Sign(addedVel.x), 0f, Mathf.Max(Mathf.Max(Mathf.Abs(addedVel.z) - deaccel * (IsGrounded() ? 1f : airDeccelMult), 0f) * Mathf.Sign(addedVel.z)));
@@ -242,9 +264,9 @@ public class Player : MonoBehaviour
         else playerVelocity.y = 0;
 
         // jump logic
-        if (IsGrounded() && jumpPressed)
+        if (IsGrounded() && jumpPressedSinceLastTick && !changingScale)
         {
-            playerVelocity.y = jumpHeight * (levelData.playerScale*0.6f + 0.4f);
+            playerVelocity.y = jumpHeight * (levelData.playerScale*0.65f + 0.3f);
         }
 
         if (playerVelocity.y > 0 && !jumpPressed)
@@ -264,7 +286,7 @@ public class Player : MonoBehaviour
 
         // 1 when pressed, 0 when not
         jumpPressed = (v != 0f);
-
+        if (jumpPressed) jumpPressedSinceLastTick = true;
     }
 
     public void OnPause(InputValue value)
@@ -306,7 +328,10 @@ public class Player : MonoBehaviour
         // Debug.Log("Mouse scroll: " + v);
         if (v != 0)
         {
-            levelData.playerScale = Mathf.Clamp(levelData.playerScale + v / 400, levelData.scaleMin, levelData.scaleMax);
+            targetScale = Mathf.Clamp(levelData.playerScale + v / 400, levelData.scaleMin, levelData.scaleMax);
+            if (targetScale != levelData.playerScale) {
+                anim.Play(holdingAnim.name);
+            }
         }
     }
 
