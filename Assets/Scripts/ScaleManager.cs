@@ -37,7 +37,7 @@ public class ScaleManager : MonoBehaviour
         {
             for (int i = 0; i < scalableObjects.Count; i++)
             {
-                scalableObjects[i].localScale = baseScales[i] * levelData.playerScale;
+                if (scalableObjects[i]) scalableObjects[i].localScale = baseScales[i] * levelData.playerScale;
             }
         }
 
