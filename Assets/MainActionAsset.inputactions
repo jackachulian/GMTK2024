@@ -265,6 +265,17 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "3f79231c-06a7-4059-9a22-cd3864f19090",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "1D Axis",
                     "id": "7ca1dd18-3a96-4181-9acb-eb8153469768",
                     "path": "1DAxis(minValue=-100,maxValue=100)",
