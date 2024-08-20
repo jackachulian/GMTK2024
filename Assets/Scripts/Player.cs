@@ -63,6 +63,8 @@ public class Player : MonoBehaviour
 
     public bool inCautionZone {get; set;}
 
+    public GameObject scaleGadgetModel;
+
     private void Awake() {
         Instance = this;
         inCautionZone = false;
@@ -192,6 +194,9 @@ public class Player : MonoBehaviour
             if (!changingScale) {
                 anim.Play(idleAnim.name);
             }
+            scaleGadgetModel.SetActive(changingScale);
+        } else {
+            scaleGadgetModel.SetActive(false);
         }
 
         GeneralPhysics();
