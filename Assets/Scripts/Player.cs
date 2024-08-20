@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
 
     [Space]
     [SerializeField] private Animator anim;
-    [SerializeField] private AnimationClip walkingAnim, idleAnim, inAirAnim, placingAnim,jumpingAnim;
+    [SerializeField] private AnimationClip walkingAnim, idleAnim, inAirAnim, placingAnim,jumpingAnim,holdingAnim;
 
 
     public bool inCautionZone {get; set;}
@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
     private void Awake() {
         Instance = this;
         inCautionZone = false;
+        targetScale = 1f;
     }
 
     // Start is called before the first frame update
@@ -109,16 +110,16 @@ public class Player : MonoBehaviour
             debugText.text += "DotS: " + surfaceDot + "\n";
         }
 
+        // if(IsGrounded() && IsWalking()){
+        //     anim.Play(walkingAnim.name);
+        // }
+
         anim.SetBool("isWalking",IsWalking());
         anim.SetBool("isGrounded",IsGrounded());
 
         if(anim.GetCurrentAnimatorClipInfoCount(0) > 0 && anim.GetCurrentAnimatorClipInfo(0) != null && anim.GetCurrentAnimatorClipInfo(0)[0].clip.name == inAirAnim.name && IsGrounded()){
             anim.Play(idleAnim.name);
         }
-        // if(IsGrounded() && IsWalking()){
-        //     anim.Play(walkingAnim.name);
-        // }
-
     }
 
     public void ResetPlayer(){
@@ -167,6 +168,8 @@ public class Player : MonoBehaviour
         ResetPlayer();
     }
 
+    float targetScale = 1f;
+    [SerializeField] private float scaleSpeed = 8f;
 
     void FixedUpdate()
     {
@@ -180,7 +183,17 @@ public class Player : MonoBehaviour
         );
         // camParent.eulerAngles = new Vector3(camRotateDir.y * camSens.y, camRotateDir.x * camSens.x, 0f);
 
-        GeneralPhysics();
+        UpdateCamera();
+
+        if (levelData.playerScale != targetScale) {
+            levelData.playerScale = Mathf.MoveTowards(levelData.playerScale, targetScale, Time.fixedDeltaTime*scaleSpeed);
+            if (levelData.playerScale == targetScale) {
+                anim.Play(idleAnim.name);
+            }
+            playerVelocity = Vector3.MoveTowards(playerVelocity, Vector3.zero, 0.1f);
+        } else {
+            GeneralPhysics();
+        }
 
         // end of frame logic
         // 'frame' in this case actually means each physics sim tick... oops
@@ -195,9 +208,8 @@ public class Player : MonoBehaviour
         return Vector3.Dot(playerVelocity, forward) > 0.01;
     }
 
-    private void GeneralPhysics()
-    {
-        // player move/run logic
+    private void UpdateCamera() {
+          // player move/run logic
         // get forward direction based on cam, temporarily remove x rotation
         Vector3 oldCamAngles = camParent.eulerAngles;
         camParent.eulerAngles = new Vector3(0f, camParent.eulerAngles.y + camRotateDir.x * -camSens.x, 0f);
@@ -209,6 +221,7 @@ public class Player : MonoBehaviour
             dotVel = Mathf.Max(startSpeed, dotVel + accel * (IsGrounded() ? 1f : airAccelMult));
         }
 
+        
         // set position of build preview.
         buildPreviewObject.transform.position = new Vector3(
             transform.position.x + camParent.transform.forward.x * 2f * levelData.playerScale,
@@ -217,8 +230,13 @@ public class Player : MonoBehaviour
         );
         buildPreview.SnapToGround();
         if (forward != Vector3.zero) buildPreviewObject.transform.forward = camParent.transform.forward;
+        
 
         camParent.eulerAngles = oldCamAngles;
+    }
+
+    private void GeneralPhysics()
+    {
         float speedMult = (levelData.playerScale > 1f) ? (levelData.playerScale*0.6f + 0.4f) : levelData.playerScale;
         playerVelocity.x = forward.x * dotVel * speedMult;
         playerVelocity.z = forward.z * dotVel * speedMult;
@@ -306,7 +324,10 @@ public class Player : MonoBehaviour
         // Debug.Log("Mouse scroll: " + v);
         if (v != 0)
         {
-            levelData.playerScale = Mathf.Clamp(levelData.playerScale + v / 400, levelData.scaleMin, levelData.scaleMax);
+            targetScale = Mathf.Clamp(levelData.playerScale + v / 400, levelData.scaleMin, levelData.scaleMax);
+            if (targetScale != levelData.playerScale) {
+                anim.Play(holdingAnim.name);
+            }
         }
     }
 
