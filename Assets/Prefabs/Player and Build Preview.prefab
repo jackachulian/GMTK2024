@@ -131,6 +131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelData: {fileID: 0}
+  validPlacementMat: {fileID: 2100000, guid: b71152c65c0250e4587e959e4b3b3b27, type: 2}
+  invalidPlacementMat: {fileID: 2100000, guid: 1d8dffae74275a74790fa7bd36125410, type: 2}
 --- !u!1 &4075132209430419205
 GameObject:
   m_ObjectHideFlags: 0
