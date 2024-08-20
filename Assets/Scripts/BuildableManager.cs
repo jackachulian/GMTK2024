@@ -31,6 +31,8 @@ public class BuildableManager : MonoBehaviour
     {
         if (disabled) return;
 
+        if (buildables.Length == 0) return;
+
         // find and set next index
         bool found = false;
         for (int i = currentSelectedBuildable + delta; i < buildables.Length + currentSelectedBuildable + delta; i++)   

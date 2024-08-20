@@ -27,7 +27,7 @@ public class BuildPreview : MonoBehaviour
         // set position to ground
         // RaycastHit hit;
         if (Physics.BoxCast(new Vector3(rend.bounds.center.x, rend.bounds.center.y + 4f * levelData.playerScale, rend.bounds.center.z), 
-        new Vector3(rend.bounds.max.x - rend.bounds.min.x, rend.bounds.max.y - rend.bounds.min.y, rend.bounds.max.z - rend.bounds.min.z) * 0.5f, 
+        new Vector3(rend.bounds.max.x - rend.bounds.min.x, rend.bounds.max.y - rend.bounds.min.y, rend.bounds.max.z - rend.bounds.min.z) * 0.45f, // slight amount of tolerance for placing in gaps
         Vector3.down,
         out hit,
         transform.rotation,
@@ -41,7 +41,7 @@ public class BuildPreview : MonoBehaviour
             // check with a slightly smaller box size if the preview is intersecting with anything to allow some tolerance
             canPlace = !Physics.CheckBox(
                 pos,
-                new Vector3(rend.bounds.max.x - rend.bounds.min.x, rend.bounds.max.y - rend.bounds.min.y, rend.bounds.max.z - rend.bounds.min.z) * 0.25f, // <- only difference between first box size and this
+                new Vector3(rend.bounds.max.x - rend.bounds.min.x, rend.bounds.max.y - rend.bounds.min.y, rend.bounds.max.z - rend.bounds.min.z) * 0.25f, // much more tolerance for actually letting player if there is reasonable space
                 transform.rotation,
                 layerMask: groundMask
             );
