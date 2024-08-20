@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ScaleKeys",
+                    "type": "PassThrough",
+                    "id": "d3f613d9-d0a3-48f9-97fb-bc8da577479b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -254,6 +263,39 @@
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "7ca1dd18-3a96-4181-9acb-eb8153469768",
+                    "path": "1DAxis(minValue=-100,maxValue=100)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScaleKeys",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "positive",
+                    "id": "1a39016f-07fb-4c00-996b-59ea7ad595f3",
+                    "path": "<Keyboard>/#(E)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScaleKeys",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "negative",
+                    "id": "8a1a0e93-fa79-4260-a19c-c754401d7ffd",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScaleKeys",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

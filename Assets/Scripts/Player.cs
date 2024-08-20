@@ -322,6 +322,15 @@ public class Player : MonoBehaviour
 
     public void OnChangeScale(InputValue value)
     {
+        Scaling(value);
+    }
+
+    public void OnScaleKeys(InputValue value){
+        Debug.Log("ScaleKeys: "+value);
+        Scaling(value);
+    }
+
+    private void Scaling(InputValue value){
         if (inCautionZone) return;
 
         float v = value.Get<float>();
