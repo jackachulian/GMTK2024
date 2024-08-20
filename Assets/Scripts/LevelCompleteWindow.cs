@@ -23,7 +23,7 @@ public class LevelCompleteWindow : MonoBehaviour
     void OnEnable(){
         if(SceneManager.GetActiveScene().buildIndex - 1 == 7){
             firstSelected = levelSelectButton;
-            continueButton.SetActive(false);
+            // continueButton.SetActive(false);
             winText1.text = "  YOU";
             winText2.text = " WIN!";
         }
